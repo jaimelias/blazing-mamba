@@ -1,0 +1,15 @@
+<section class="container">
+	<article class="post" itemscope itemtype="http://schema.org/Article">
+		<h1 class="post-title" itemprop="name"><%=page.title%></h1>
+		<% if(page.description) { %>
+			<h2 class="light" itemprop="name"><%=page.description%></h2>
+		<% } %>
+		<div class="sharethis-inline-share-buttons"></div>
+		<p><img class="img-responsive" height="400" width="600" src="/images/<%if(page.image != null){%><%= page.image %><%} else{%>bg-logo.svg<% } %>" alt="<%= page.title%>" /></p>
+		<div class="entry-content"><%-page.content%></div>
+		<div class="sharethis-inline-share-buttons"></div>
+	</article>
+	<div id="comments">
+		<div id="disqus_thread"></div>
+	</div>
+</section>

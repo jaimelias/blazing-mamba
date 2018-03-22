@@ -1,0 +1,88 @@
+
+# html lang
+language: es
+
+# main menu navigation
+menu:
+  Blog: /blog/
+  Tiendas Virtuales: /tiendas/
+  Incubadora: /incubadora/
+
+#url, title, class, onclick
+menu_button:
+  user:
+    url: /emprende/
+    title: "Emprende"
+    class: "pure-button-primary"
+
+# Miscelaneous
+logo:
+  enabled: true
+  width: 150
+  height: 60
+  url: images/logo.svg
+front_page:
+  enabled: true
+  url_lg: images/front-page-lg.jpg
+  url_md: images/front-page-md.jpg
+
+# stylesheets loaded in the <head>
+# source/css/
+stylesheets:
+  custom:
+    - custom.css
+    - responsive-menu.css
+    - colors.css
+    - pure.css
+    - media.css
+    - pure-responsive-grids.css
+
+# scripts loaded in the end of the body
+#name > (url, async:async) type
+scripts:
+  google_analytics:
+    url: https://www.google-analytics.com/analytics.js
+    async: async
+    callback: google_async("UA-101494881-1")
+  sharethis:
+    url: //platform-api.sharethis.com/js/sharethis.js#property=5ab12a30b338830013654fef&product=inline-share-buttons
+    async: async
+  disqus:
+    url: /disqus.js?ver=9
+    async: async
+    callback: disqus_async("jaimelias")
+	
+local_scripts:
+  loadJS:
+    - loadJS.js
+  site:
+    - site.js
+
+##remove loadCSS to hit 100% on google
+
+#true, false or API key for facebook	
+social:
+  twitter: true
+  facebook: true
+  gplus: true
+  pinterest: true
+  email: true
+  disqus_user: jaimelias
+  
+#blog config
+hero:
+    home:
+      enable: true
+      title: "E-commerce y Desarrollado Web en Panamá"
+    blog:
+      enable: true
+      title: "Blog de e-commerce para emprendedores en Panamá"
+      description: "Estrategias probadas para vender en línea fácilmente"
+      button:
+        text: "Aprende E-commerce"
+    newsletter:
+      enable: true
+      title: "Estrategias E-commerce en tu email"
+      description: "Aprende las mejores estrategias para posicionarse y vender en línea"
+      button:
+        text: "Suscríbete"

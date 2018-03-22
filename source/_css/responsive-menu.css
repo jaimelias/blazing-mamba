@@ -1,0 +1,62 @@
+@media (max-width:48em)
+{
+	#header-menu > li > a:not(.pure-button)
+	{
+		padding: 0 40px;
+	}
+	#header-menu > li > a.pure-button
+	{
+		margin: 40px;
+	}
+	#search
+	{
+		margin-left: 40px;
+		margin-right: 40px;
+	}
+	#header-menu > li
+	{
+		border-top: 1px solid #444;
+	}
+	#menuToggled
+	{
+		background-color: #262626;
+		position: fixed;
+		top: 0;
+		right: -300px;
+		width: 300px;
+		height: 100vh;
+	}
+	#header-menu
+	{
+		width: 100%;
+	}		
+}
+@media (min-width:48.5em)
+{
+	#header-menu > li > a:not(.pure-button)
+	{
+		padding: 0 15px;		
+	}	
+	#header-menu > li.header-button
+	{
+		float: right;
+	}
+	#header-menu > li.header-button > a.pure-button
+	{
+		margin: 24px 0 24px 15px;
+	}	
+	#menuToggled .pure-menu
+	{
+		width: 100%;
+		white-space: nowrap;		
+	}
+	#menuToggled .pure-menu .pure-menu-list > li
+	{
+		display: inline-block;
+	}	
+	#search
+	{
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+}

@@ -1,0 +1,23 @@
+<div class="hero text-center" <% if(hero == "home" && theme.front_page.enabled == true) {%>id="front-page-bg"<% } %>>
+	<div class="hero-content block">
+		<div class="container">
+			<% if(theme.hero[hero].title) {%>
+				<% if(hero == "newsletter") {%>
+					<h2 class="uppercase"><%= theme.hero[hero].title%></h2>
+				<% } else {%>
+					<h1 class="uppercase"><%= theme.hero[hero].title%></h1>
+			<%}}%>
+			<% if(theme.hero[hero].description) {%>
+				<h3 class="light"><%= theme.hero[hero].description%></h3>
+			<%}%>
+			<% if(theme.hero[hero].button) {%>
+				<a class="pure-button pure-button-black button-xl strong uppercase" onclick="show_modal()"><%= theme.hero[hero].button.text%></a>
+			<%}%>	
+		</div>
+	</div>
+	
+	<div class="hero-follow">
+		<div class="container-fluid uppercase sharethis-inline-follow-buttons"></div>
+	</div>
+
+</div>

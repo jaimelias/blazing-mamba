@@ -1,0 +1,5 @@
+<%if(page.slides){%>
+	<% Object.keys(page.slides).forEach(function(key) { %>
+		<img class="img-responsive" width="600" height="400" alt="<%= page.title%>" src="/images/<%= page.slides[key]%>" />
+	<%});%>
+<%}%>	

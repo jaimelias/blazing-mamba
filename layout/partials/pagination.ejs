@@ -1,0 +1,11 @@
+<% if (page.total > 1) { %>
+    <nav id="pagination" class="text-center small">
+        <% if (page.prev) { %>
+            <a class="pure-button" href="<%- url_for(page.prev_link) %>"><%= __("prev")%></a>
+        <% } %>
+        <span class="page-number"><%= page.current + " " + __("of") + " " + page.total %></span>
+        <% if (page.next) { %>
+            <a class="pure-button" href="<%- url_for(page.next_link) %>"><%= __("next") %></a>
+        <% } %>
+    </nav>
+<% } %>

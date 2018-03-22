@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="<%=config.language%>">
+<head>
+<meta charset="UTF-8">
+<title><%=blaz().title%></title>
+
+<!-- scripts list from theme config.yml --> 
+    <% Object.keys(theme.css).forEach(function(key) { %>
+		<% if(key == "instantsearchCSS"){ %>
+			<% if(is_home()){ %>
+				<style id="<%=key%>"><%-theme.css[key]%></style>
+			<% } %>
+		<% } else { %>
+			<style id="<%=key%>"><%-theme.css[key]%></style>
+		<% } %>
+    <% }); %>
+
+<link rel="canonical" href="<%= blaz().canonical %>"/>
+ 
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+<link rel="mask-icon" href="/images/icons/safari-pinned-tab.svg" color="#000000">
+
+<%-partial("partials/ld-json")%>
+   
+</head>
+<body <% if(is_home() || is_post() || is_archive()){ %>class="is_post"<% } %>>
+
+<div id="wrapper">
+
+<%if(is_home()){%>
+		<%-partial("partials/hero", {hero: "home"})%>
+<% } %>
+
+<%if(is_archive()){%>
+		<%-partial("partials/hero", {hero: "blog"})%>
+<% } %>
+	
+	<div id="content" class="clearfix container-fluid">
+		<%- body %>
+	</div>
+</div>
+
+<%-partial("partials/hero", {hero: "newsletter"})%>
+
+<footer id="footer">
+	<div class="container-fluid small text-center">
+		Powered by <a target="_blank" href="https://jaimelias.com">jaimelias.com</a>
+	</div>
+</footer>
+
+<%-partial("partials/menu", {}, {cache: true})%>
+
+ 
+<!-- scripts list from theme config.yml --> 
+<% Object.keys(theme.javascript).forEach(function(key) { %>
+	<script id="<%=key%>"><%-theme.javascript[key]%></script>
+<% }); %>
+
+<!-- scripts list from theme config.yml --> 
+<% Object.keys(theme.scripts).forEach(function(key) { %>
+	<% if(theme.scripts[key].hasOwnProperty("async")){ %>
+		<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].hasOwnProperty("callback")){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
+	<%} else {%>
+		<script src="<%=theme.scripts[key].url%>"></script>
+	<% } %>
+<% }); %>
+
+<%-partial("forms/subscribe", {}, {cache: true})%>
+
+</body>
+</html>

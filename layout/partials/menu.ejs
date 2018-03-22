@@ -1,0 +1,44 @@
+<!-- Start Navbar -->
+
+	<header id="header-bar" class="fixed top-0 left-0 width-100 block">
+
+		<div class="container-fluid">
+			<div class="pure-g">
+				
+				<div class="pure-u-1 pure-u-md-1-5">
+					<a href="/"><% if(theme.logo.enabled == true){ %><img id="logo" src="/<%= theme.logo.url %>" width="<%= theme.logo.width %>" height="<%= theme.logo.height %>" alt="<%- config.title %>" /><% } %></a>
+					<button class="hamburger inline-block md-hide lg-hide" onclick="toggleMenu()"></button>		
+				</div>
+				
+				<div class="pure-u-1 pure-u-md-4-5">
+					
+					<div id="menuToggled">
+						<nav class="pure-menu">
+							
+							<div id="sidebar-control" class="md-hide lg-hide"><button class="close pointer block text-center" onclick="toggleMenu()">&times;</button></div>
+							
+							<ul id="header-menu" class="pure-menu-list">
+								<% Object.keys(theme.menu).forEach(function(key) { %>
+									<li class="pure-menu-item">
+										<a class="uppercase block" href="<%=theme.menu[key]%>"><%=key%></a>
+									</li>
+								<% }); %>
+									
+									<% if(theme.hasOwnProperty("menu_button")){ %>
+										<% Object.keys(theme.menu_button).forEach(function(key) { %>
+											<li class="pure-menu-item header-button">
+												<% if(theme.menu_button.user.hasOwnProperty("onclick")){ %>
+													<a href="#" class="uppercase block pure-button <%=theme.menu_button[key].class%>" onclick="<%=theme.menu_button[key].onclick%>; return false;"><%=theme.menu_button[key].title%></a>
+												<% } else {%>
+													<a class="uppercase block pure-button <%=theme.menu_button[key].class%>" <%if(theme.menu_button[key].hasOwnProperty("url")){%>href="<%=theme.menu_button[key].url%>"<%}%>><%=theme.menu_button[key].title%></a>												
+												<% } %>
+											</li>
+										<% }); %>
+									<% } %>
+							</ul>
+						</nav>
+					</div>
+				</div>	
+			</div>
+		</div>
+	</header>

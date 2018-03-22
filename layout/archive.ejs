@@ -1,0 +1,17 @@
+
+
+<% var args = page.posts.sort("date", "desc").limit(config.per_page || 3) %>
+
+<div class="container">
+	<section id="index"> 
+		<% args.each(function(post){ %>
+			<div class="post">
+				<h2 class="post-title"><a href="<%= url_for(post.path) %>"><%= post.title%></a></h2>
+				<h3 class="light"><%= post.description %></h3>
+				<p><img class="img-responsive" height="400" width="600" src="/images/<%if(post.image != null){%><%= post.image %><%} else{%>bg-logo.svg<% } %>" alt="<%= post.title%>" /></p>
+				<div><a class="pure-button pure-button-black uppercase light" href="<%= url_for(post.path) %>"><%= __("read_more")%></a></div>
+			</div>
+		<% }); %>
+		<%-partial('partials/pagination')%>
+	</section>
+</div>

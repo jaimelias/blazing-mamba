@@ -1,0 +1,16 @@
+
+<div class="container">
+	<div class="page">
+		<h1><%=page.title%></h1>
+			
+		<%if(page.description){%>
+			<h2 class="light"><%-page.description%></h2>
+		<%}%>			
+			
+		<%-partial("partials/slides")%>
+		<%-page.content%>
+		  
+	</div>
+</div>
+
+<%-partial("partials/pagination")%>
