@@ -1,16 +1,29 @@
 
-<div class="container">
-	<div class="page">
+<div <%if(page.algolia != true){%>class="container"<% } %>>
+	<div <%if(page.algolia != true){%>class="page"<% } else { %>class="blazing"<% } %> >
 		<h1><%=page.title%></h1>
 			
 		<%if(page.description){%>
-			<h2 class="light"><%-page.description%></h2>
+			<h2 class="light text-muted"><%-page.description%></h2>
 		<%}%>			
-			
-		<%-partial("partials/slides")%>
-		<%-page.content%>
-		  
+		
+		
+		<%if(page.algolia == true){%>
+			<div class="pure-g gutters">
+				<div class="pure-u-1 pure-u-md-1-2">
+					<% if(page.type == "Events") {%>
+						<%-partial("modules/events/booking")%>
+					<% } %>
+				</div>
+				<div class="pure-u-1 pure-u-md-1-2">
+					<%-partial("partials/slides")%>
+					<%-page.content%>
+				</div>
+			</div>
+		<% } else {%>
+			<%-partial("partials/slides")%>
+			<%-page.content%>
+		<% }%>
+	
 	</div>
 </div>
-
-<%-partial("partials/pagination")%>

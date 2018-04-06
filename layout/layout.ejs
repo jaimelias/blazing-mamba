@@ -53,7 +53,7 @@
 </footer>
 
 <%-partial("partials/menu", {}, {cache: true})%>
-
+<%-partial("forms/subscribe", {}, {cache: true})%>
  
 <!-- scripts list from theme config.yml --> 
 <% Object.keys(theme.javascript).forEach(function(key) { %>
@@ -68,8 +68,6 @@
 		<script src="<%=theme.scripts[key].url%>"></script>
 	<% } %>
 <% }); %>
-
-<%-partial("forms/subscribe", {}, {cache: true})%>
 
 </body>
 </html>

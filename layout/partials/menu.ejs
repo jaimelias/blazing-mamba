@@ -28,9 +28,9 @@
 										<% Object.keys(theme.menu_button).forEach(function(key) { %>
 											<li class="pure-menu-item header-button">
 												<% if(theme.menu_button.user.hasOwnProperty("onclick")){ %>
-													<a href="#" class="uppercase block pure-button <%=theme.menu_button[key].class%>" onclick="<%=theme.menu_button[key].onclick%>; return false;"><%=theme.menu_button[key].title%></a>
+													<a href="#" class="strong uppercase block pure-button <%=theme.menu_button[key].class%>" onclick="<%=theme.menu_button[key].onclick%>;"><%=theme.menu_button[key].title%></a>
 												<% } else {%>
-													<a class="uppercase block pure-button <%=theme.menu_button[key].class%>" <%if(theme.menu_button[key].hasOwnProperty("url")){%>href="<%=theme.menu_button[key].url%>"<%}%>><%=theme.menu_button[key].title%></a>												
+													<a class="strong uppercase block pure-button <%=theme.menu_button[key].class%>" <%if(theme.menu_button[key].hasOwnProperty("url")){%>href="<%=theme.menu_button[key].url%>"<%}%>><%=theme.menu_button[key].title%></a>												
 												<% } %>
 											</li>
 										<% }); %>

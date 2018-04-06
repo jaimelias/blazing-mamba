@@ -4,23 +4,23 @@ language: es
 
 # main menu navigation
 menu:
-  Blog: /blog/
-  Tiendas Virtuales: /tiendas/
-  Incubadora: /incubadora/
+  Comunidad: /comunidad/
+  Paquetes: /paquetes/
+  Experiencias: /experiencias/
 
 #url, title, class, onclick
 menu_button:
   user:
-    url: /emprende/
-    title: "Emprende"
+    url: /cotizaciones/
+    title: "Cotizaciones"
     class: "pure-button-primary"
 
 # Miscelaneous
 logo:
   enabled: true
-  width: 150
-  height: 60
-  url: images/logo.svg
+  width: 180
+  height: 80
+  url: images/mamba-logo.svg
 front_page:
   enabled: true
   url_lg: images/front-page-lg.jpg
@@ -45,7 +45,7 @@ scripts:
     async: async
     callback: google_async("UA-101494881-1")
   sharethis:
-    url: //platform-api.sharethis.com/js/sharethis.js#property=5ab12a30b338830013654fef&product=inline-share-buttons
+    url: //platform-api.sharethis.com/js/sharethis.js#property=5ab97990ce89f000136419fd&product=inline-share-buttons
     async: async
   disqus:
     url: /disqus.js?ver=9
@@ -57,6 +57,8 @@ local_scripts:
     - loadJS.js
   site:
     - site.js
+  events:
+    - events.js
 
 ##remove loadCSS to hit 100% on google
 
@@ -73,16 +75,20 @@ social:
 hero:
     home:
       enable: true
-      title: "E-commerce y Desarrollado Web en Panamá"
+      title: "Creadores de Experiencias"
     blog:
       enable: true
-      title: "Blog de e-commerce para emprendedores en Panamá"
-      description: "Estrategias probadas para vender en línea fácilmente"
+      title: "#ComunidadMamba"
+      description: "Forma parte de la comunidad creativa de emprendedores más influyente y radical de Panamá"
       button:
-        text: "Aprende E-commerce"
+        text: "Únete Gratis"
+        url:
+        onclick: show_modal()
     newsletter:
       enable: true
-      title: "Estrategias E-commerce en tu email"
-      description: "Aprende las mejores estrategias para posicionarse y vender en línea"
+      title: "Expón tu talento a las marcas"
+      description: "Únete a la #ComunidadMamba y lleva tu talento al siguiente al siguiente nivel. Fotografía, cine, modelaje, gastronomía..."
       button:
-        text: "Suscríbete"
+        text: "Suscríbete Gratis"
+        url:
+        onclick: show_modal()
