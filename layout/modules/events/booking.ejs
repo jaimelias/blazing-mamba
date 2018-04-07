@@ -6,6 +6,8 @@
 	<input type="hidden" name="package" value="<%= page.events[key].name%>" />
 	<input type="hidden" name="description" value="<%= page.events[key].description%>" />
 	<input type="hidden" name="includes" value="<%= JSON.stringify(page.events[key].includes)%>" />
+	<textarea class="hidden" name="addons"></textarea>
+	<input type="hidden" name="price" />
 	
 		<div class="event-header bottom-20">
 			<h4 class="large uppercase"><%=(parseInt(key)+1)%> <%= page.events[key].name%></h4>
@@ -21,6 +23,15 @@
 							<li><%= page.events[key].includes[list]%></li>
 						<%});%>
 					</ul>
+					
+					<% if(page.events[key].hasOwnProperty("addons")){%>
+						<div class="strong text-muted">Extras Disponibles:</div>
+						<ul class="text-muted small">
+							<% Object.keys(page.events[key].addons).forEach(function(list) { %>
+								<li><%= page.events[key].addons[list].name%> ($<%= page.events[key].addons[list].price%> c/u)</li>
+							<%});%>
+						</ul>
+					<% } %>
 				</div>
 			</div>
 		</div>
@@ -28,14 +39,12 @@
 			<div class="bottom-10">
 				<div class="pure-g gutters">
 					<div class="pure-u-1 pure-u-sm-1-2">
-						<label>Nombre Completo</label>
+						<label>Nombre completo</label>
 						<input type="text" name="name" class="width-100"/>
 					</div>
 					<div class="pure-u-1 pure-u-sm-1-2">
 						<label>Email</label>
-						<select name="lastname" class="width-100">
-							<option>--</option>
-						</select>
+						<input type="email" name="email" class="width-100"/>
 					</div>
 				</div>
 			</div>	
@@ -67,15 +76,35 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="bottom-20">
+				<button onclick="toggleExtras('<%= key %>')" class="small pure-button pure-button-primary" type="button">Mostrar extras disponibles &#9660;</button>
+			</div>
+			<div id="event-addons-<%= key %>" class="hidden box bottom-20">
+				<div class="large strong bottom-20">Extras disponibles</div>
+				<% if(page.events[key].hasOwnProperty("addons")){%>
+					<% Object.keys(page.events[key].addons).forEach(function(list) { %>
+						<div class="bottom-10">
+							<label><select class="addon" name="addon_<%=list%>">
+								<option value="0">0</option>
+								<%for(var x = 0; x < page.events[key].addons[list].max; x++){%>
+									<option value="<%=(x+1)%>"><%=(x+1)%></option>
+								<% } %>
+							</select> <%= page.events[key].addons[list].name%> ($<%= page.events[key].addons[list].price%> c/u)</label>		
+						</div>
+					<%});%>
+				<% } %>
+			</div>
+		
 		</div>
 
-			<div id="event-send-<%= key %>" class="hidden">
-				<button class="uppercase strong pure-button pure-button-black block width-100" type="submit">Enviar solicitud</button>
-			</div>
-			
-			<div id="event-show-<%= key %>">
-				<button onclick="toggleEvent('<%= key %>')" class="uppercase strong pure-button pure-button-primary block width-100" type="button">Lo quiero</button>
-			</div>
+		<div id="event-send-<%= key %>" class="hidden">
+			<button onclick="booking_submit('<%= key %>')" class="uppercase strong pure-button pure-button-black block width-100" type="button">Enviar solicitud</button>
+		</div>
+		
+		<div id="event-show-<%= key %>">
+			<button onclick="toggleEvent('<%= key %>')" class="uppercase strong pure-button pure-button-primary block width-100" type="button">Lo quiero</button>
+		</div>
 		
 	</form>
 <% }); %>

@@ -17,4 +17,6 @@ function google_async(UA)
 	ga('create', UA, 'auto');
 	ga('send', 'pageview');	
 }
-
+function hasClass(e, c) {
+    return (' ' + e.className + ' ').indexOf(' ' + c + ' ') > -1;
+}

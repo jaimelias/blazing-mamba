@@ -292,7 +292,10 @@ th {
     box-shadow: none;
     pointer-events: none
 }
-
+.pure-form textarea.hidden, textarea.hidden
+{
+	display: none;
+}
 .pure-form input[type=email],
 .pure-form input[type=url],
 .pure-form input[type=date],

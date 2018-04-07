@@ -7,6 +7,10 @@
 	background-color: #f7f7f7;
 	box-shadow: 0 0 2px 1px rgba(0,0,0,0.1);
 }
+.event
+{
+	border-top: 2px solid #009bff;
+}
 .text-muted, label
 {
 	color: #666;
