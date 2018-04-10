@@ -9,11 +9,20 @@
 		
 		
 		<%if(page.algolia == true){%>
+		
+			<div class="bottom-20">
+				<div class="sharethis-inline-share-buttons"></div>
+			</div>
+			
 			<div class="pure-g gutters">
 				<div class="pure-u-1 pure-u-md-1-2">
 					<% if(page.type == "Events") {%>
+						<script type="text/html" id="breakdown-template">
+							<%-partial("modules/events/table", {}, {cache: true})%>
+						</script>
 						<%-partial("modules/events/booking")%>
 					<% } %>
+					<div class="sharethis-inline-share-buttons"></div>
 				</div>
 				<div class="pure-u-1 pure-u-md-1-2">
 					<%-partial("partials/slides")%>

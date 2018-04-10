@@ -1,11 +1,11 @@
-<script id="event-json" type="application/json"><%- JSON.stringify(page.price)%></script>
-
 <% Object.keys(page.events).forEach(function(key) { %>
 
-	<script id="event-json-<%=key%>" type="application/json"><%- JSON.stringify(page.events[key])%></script>
+	<% var obj = {}; obj.title = page.title; obj.name = page.events[key].name; obj.base_price = page.price; obj.event_price = page.events[key].price; obj.addons = page.events[key].addons;%>
+
+	<script id="event-json-<%=key%>" type="application/json"><%- JSON.stringify(obj)%></script>
 
 	<form name="booking" id="event-<%= key%>" class="event box pure-form bottom-20">
-	
+		
 	<input type="hidden" name="event" value="<%= page.title%>" />
 	<input type="hidden" name="package" value="<%= page.events[key].name%>" />
 	<input type="hidden" name="description" value="<%= page.events[key].description%>" />
@@ -60,7 +60,7 @@
 					</div>
 					<div class="pure-u-1 pure-u-sm-1-2">
 						<label>Participantes</label>
-						<select onchange="calculate_total(<%=key%>)" id="event-participants-<%=key%>" name="participants" class="width-100">
+						<select onchange="calculate_vars(<%=key%>)" id="event-participants-<%=key%>" name="participants" class="width-100">
 							<option>--</option>
 							<% if(page.events[key].min_capacity < page.events[key].max_capacity){ %>
 								<% for(var x = 0; x < page.events[key].max_capacity; x++) {%>
@@ -94,7 +94,7 @@
 				<% if(page.events[key].hasOwnProperty("addons")){%>
 					<% Object.keys(page.events[key].addons).forEach(function(list) { %>
 						<div class="bottom-10">
-							<label><select class="addon" name="addon_<%=list%>">
+							<label><select onchange="calculate_vars(<%=key%>)" class="addon addon-<%=key%>" name="addon-<%=key%>-<%=list%>">
 								<option value="0">0</option>
 								<%for(var x = 0; x < page.events[key].addons[list].max; x++){%>
 									<option value="<%=(x+1)%>"><%=(x+1)%></option>
@@ -106,6 +106,8 @@
 			</div>
 		
 		</div>
+		
+		<div class="bottom-20 event-breakdown-<%= key %>"></div>
 
 		<div id="event-send-<%= key %>" class="hidden">
 			<button onclick="booking_submit('<%= key %>')" class="uppercase strong pure-button pure-button-black block width-100" type="button">Enviar solicitud</button>

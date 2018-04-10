@@ -40,17 +40,23 @@ stylesheets:
 # scripts loaded in the end of the body
 #name > (url, async:async) type
 scripts:
+  hogan:
+    url: /hogan.js
+    position: top
   google_analytics:
     url: https://www.google-analytics.com/analytics.js
     async: async
     callback: google_async("UA-101494881-1")
+    position: bottom
   sharethis:
     url: //platform-api.sharethis.com/js/sharethis.js#property=5ab97990ce89f000136419fd&product=inline-share-buttons
     async: async
+    position: bottom
   disqus:
     url: /disqus.js?ver=9
     async: async
     callback: disqus_async("jaimelias")
+    position: bottom
 	
 local_scripts:
   loadJS:

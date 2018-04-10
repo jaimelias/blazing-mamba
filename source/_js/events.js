@@ -58,47 +58,56 @@ function booking_submit(event_id)
 	console.log(output);
 }
 
-function calculate_total(event_id)
+function calculate_vars(event_id)
 {
-	var participants = 0;
-	var base_price = document.getElementById('event-json').innerHTML;
-	var event_form = document.getElementById('event-' + event_id);
+	var obj = {};
+	obj.items = [];
+	var total = 0;
+	var template = Hogan.compile(document.getElementById('breakdown-template').innerHTML);
+	var json = JSON.parse(document.getElementById('event-json-' + event_id).innerHTML);
 	var participants = document.getElementById('event-participants-' + event_id).value;
-	participants = participants != '--' ? parseInt(participants) : 0;
+	participants = participants != '--' ? parseInt(participants) : 0;	
+	total = json.base_price + (json.event_price * participants);
 	
-	try
+	
+	if(json.base_price > 0)
 	{
-		base_price = JSON.parse(base_price);
+		var base = {};
+		base.description = json.title;
+		base.quantity = 1;
+		base.price = json.base_price;
+		base.subtotal = json.base_price;
+		obj.items.push(base);		
 	}
-	catch(e)
-	{
-		console.log(e);
-	}
+	
+	var item = {};
+	item.description = json.name;
+	item.quantity = participants;
+	item.price = json.event_price;
+	item.subtotal = json.event_price * participants;
+	obj.items.push(item);
 
-	base_price = base_price ? parseFloat(base_price) : 0;
-	var output = base_price;	
-	var event_price = document.getElementById('event-json-' + event_id).innerHTML;
+	[].forEach.call(document.getElementsByClassName('addon-'+event_id), function (el, index) {
+		
+		var item = {};
+		item.quantity = el.value;
+		
+		if(item.quantity > 0)
+		{
+			
+			item.description = json.addons[index].name;
+			item.price = json.addons[index].price;
+			item.subtotal = item.quantity * item.price;
+			total = total + (item.subtotal);
+			obj.items.push(item);
+		}
+
+	});
+		
+	obj.total = total;
+	obj.participants = participants;
 	
-	try
-	{
-		event_price = JSON.parse(event_price);
-	}
-	catch(e)
-	{
-		console.log(e);
-	}
-	
-	event_price = event_price.price;
-	
-	if(Array.isArray(event_price))
-	{
-		//do nothing
-	}
-	else
-	{
-		//do  nothing
-		output = output + (event_price * participants);
-	}
-	
-	console.log(output);
+	[].forEach.call(document.getElementsByClassName('event-breakdown-'+event_id), function (el) {
+		el.innerHTML = template.render(obj);
+	});	
 }

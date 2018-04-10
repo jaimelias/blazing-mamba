@@ -54,6 +54,19 @@
 
 <%-partial("partials/menu", {}, {cache: true})%>
 <%-partial("forms/subscribe", {}, {cache: true})%>
+
+
+<!-- scripts list from theme config.yml --> 
+<% Object.keys(theme.scripts).forEach(function(key) { %>
+	<% if(theme.scripts[key].position == "top"){ %>
+		<% if(theme.scripts[key].hasOwnProperty("async")){ %>
+			<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].hasOwnProperty("callback")){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
+		<%} else {%>
+			<script src="<%=theme.scripts[key].url%>"></script>
+		<% } %>
+	<% } %>
+<% }); %>
+
  
 <!-- scripts list from theme config.yml --> 
 <% Object.keys(theme.javascript).forEach(function(key) { %>
@@ -62,10 +75,12 @@
 
 <!-- scripts list from theme config.yml --> 
 <% Object.keys(theme.scripts).forEach(function(key) { %>
-	<% if(theme.scripts[key].hasOwnProperty("async")){ %>
-		<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].hasOwnProperty("callback")){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
-	<%} else {%>
-		<script src="<%=theme.scripts[key].url%>"></script>
+	<% if(theme.scripts[key].position == "bottom"){ %>
+		<% if(theme.scripts[key].hasOwnProperty("async")){ %>
+			<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].hasOwnProperty("callback")){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
+		<%} else {%>
+			<script src="<%=theme.scripts[key].url%>"></script>
+		<% } %>
 	<% } %>
 <% }); %>
 
