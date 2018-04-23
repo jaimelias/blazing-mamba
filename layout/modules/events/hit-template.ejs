@@ -1,0 +1,20 @@
+<div class="hit">
+	<div class="pure-g gutters">
+		<div class="pure-u-1 pure-u-sm-1-2 pure-u-md-1-4">
+			<div>
+				<a href="{{path}}"><img class="img-responsive" height="100" width="150" src="{{thumbnail}}" alt="{{title}}"></a>	
+			</div>		
+		</div>
+		<div class="pure-u-1 pure-u-sm-1-2 pure-u-md-1-2">
+			<h4 class="hit-title uppercase bottom-10"><a href="{{path}}">{{{_highlightResult.title.value}}}</a></h4>
+			<div class="hit-location text-muted small xs-hide sm-hide">
+				<span>{{{_highlightResult.city.value}}}</span>
+			</div>			
+		</div>
+		<div class="pure-u-1 pure-u-sm-1 pure-u-md-1-4">
+			<div class="hit-price text-right bottom-20">
+				<span class="small">From USD</span> <strong class="large">${{price}}</strong>
+			</div>			
+		</div>
+	</div>
+</div>

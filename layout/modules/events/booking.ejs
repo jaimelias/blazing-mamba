@@ -4,13 +4,13 @@
 
 	<script id="event-json-<%=key%>" type="application/json"><%- JSON.stringify(obj)%></script>
 
-	<form name="booking" id="event-<%= key%>" class="event box pure-form bottom-20">
+	<form name="booking" data-url="<%= obj.url = blaz().canonical;%>" data-webhook="<%= theme.webhook.base64_url%>" id="event-<%= key%>" class="event box pure-form bottom-20">
 		
 	<input type="hidden" name="event" value="<%= page.title%>" />
 	<input type="hidden" name="package" value="<%= page.events[key].name%>" />
 	<input type="hidden" name="description" value="<%= page.events[key].description%>" />
 	<input type="hidden" name="includes" value="<%= JSON.stringify(page.events[key].includes)%>" />
-	<textarea class="hidden" name="addons"></textarea>
+	<textarea class="hidden" name="addons">NO</textarea>
 	<input type="hidden" name="price" />
 	
 		<div class="event-header bottom-20">
@@ -56,7 +56,7 @@
 				<div class="pure-g gutters">
 					<div class="pure-u-1 pure-u-sm-1-2">
 						<label>Teléfono</label>
-						<input type="text" name="name" class="width-100"/>
+						<input type="text" name="tel" class="width-100"/>
 					</div>
 					<div class="pure-u-1 pure-u-sm-1-2">
 						<label>Participantes</label>
@@ -75,7 +75,7 @@
 				<div class="pure-g gutters">
 					<div class="pure-u-1 pure-u-sm-1-2">
 						<label>Día</label>
-						<input type="text" name="day" class="width-100"/>
+						<input type="text" name="day" class="datepicker width-100"/>
 					</div>
 					<div class="pure-u-1 pure-u-sm-1-2">
 						<label>Hora</label>
@@ -94,7 +94,7 @@
 				<% if(page.events[key].hasOwnProperty("addons")){%>
 					<% Object.keys(page.events[key].addons).forEach(function(list) { %>
 						<div class="bottom-10">
-							<label><select onchange="calculate_vars(<%=key%>)" class="addon addon-<%=key%>" name="addon-<%=key%>-<%=list%>">
+							<label><select data-name="<%= page.events[key].addons[list].name%>" onchange="calculate_vars(<%=key%>)" class="addon addon-<%=key%>" name="addon-<%=key%>-<%=list%>">
 								<option value="0">0</option>
 								<%for(var x = 0; x < page.events[key].addons[list].max; x++){%>
 									<option value="<%=(x+1)%>"><%=(x+1)%></option>
@@ -119,3 +119,5 @@
 		
 	</form>
 <% }); %>
+
+<%-partial("modules/events/response")%>

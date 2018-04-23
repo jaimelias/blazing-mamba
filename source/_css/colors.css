@@ -21,7 +21,7 @@
 #footer{
     background-color:#444
 }
-#header-menu>li>a:hover:not(.pure-button){
+#header-menu>li>a:hover:not(.pure-button), #footer-menu a{
     color:#f7f7f7
 }
 .hero h3,.hero-follow,.pure-button-black,.pure-button-black:active,.pure-button-primary,.pure-button-primary:active,.pure-button.pure-button-black,.pure-button.pure-button-black:active,.pure-button.pure-button-primary,.pure-button.pure-button-primary:active,#footer,#footer a,#footer a:hover,#footer a:visited{
@@ -36,7 +36,7 @@
 .pure-button-black:before{
     background:linear-gradient(45deg,#009bff,#FC3)
 }
-.hero-follow,.pure-button-black:after{
+.hero-follow,.pure-button-black:after, #footer-menu{
     background-color:#262626
 }
 .hero{
@@ -49,7 +49,7 @@
 .hero h3{
     text-shadow:1px 1px 2px rgba(0,0,0,.3)
 }
-#comments,.hit,.modal-body,.post, .pure-table{
+#comments,.hit,.modal-body,.post, .pure-table, .hits-filter{
     background-color:#fff
 }
 h1>a,h2>a,h3>a,h4>a{

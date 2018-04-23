@@ -1,0 +1,7 @@
+<ul id="footer-menu" class="text-center small">
+	<% Object.keys(theme.footer_menu).forEach(function(key) { %>
+		<li class="inline-block">
+			<a href="<%=theme.footer_menu[key]%>"><%=key%></a>
+		</li>
+	<% }); %>
+</ul>

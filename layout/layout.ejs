@@ -10,6 +10,12 @@
 			<% if(is_home()){ %>
 				<style id="<%=key%>"><%-theme.css[key]%></style>
 			<% } %>
+		<% } else if(key == "datepicker") {%>
+			<% if(page.algolia) {%>
+				<% if(page.algolia == true) {%>
+					<style id="<%=key%>"><%-theme.css[key]%></style>
+				<% } %>
+			<% } %>
 		<% } else { %>
 			<style id="<%=key%>"><%-theme.css[key]%></style>
 		<% } %>
@@ -40,11 +46,27 @@
 <% } %>
 	
 	<div id="content" class="clearfix container-fluid">
-		<%- body %>
+		<% if(is_home()){ %>
+			<%-partial("modules/events/instantsearch", {}, {cache: true})%>
+		<%}%>
+		<% if(!is_home()){ %>
+			<%- body %>
+		<%}%>
 	</div>
 </div>
 
+<% if(is_home()){ %>
+	<div class="hero-follow bottom-40">
+		<div class="container-fluid uppercase sharethis-inline-follow-buttons"></div>
+	</div>
+	<div class="container-fluid clearfix">
+		<%- body %>
+	</div>
+<%}%>
+
 <%-partial("partials/hero", {hero: "newsletter"})%>
+
+<%-partial("partials/footer-menu", {}, {cache: true})%>
 
 <footer id="footer">
 	<div class="container-fluid small text-center">
@@ -58,31 +80,84 @@
 
 <!-- scripts list from theme config.yml --> 
 <% Object.keys(theme.scripts).forEach(function(key) { %>
-	<% if(theme.scripts[key].position == "top"){ %>
-		<% if(theme.scripts[key].hasOwnProperty("async")){ %>
-			<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].hasOwnProperty("callback")){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
-		<%} else {%>
-			<script src="<%=theme.scripts[key].url%>"></script>
+	<% if(theme.scripts[key].position == "top") { %>
+		<% if(key == "instantsearchJS"){ %>
+			<% if(is_home()){ %>
+				<% if(theme.scripts[key].async){ %>
+					<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].callback){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
+				<%} else {%>
+					<script src="<%=theme.scripts[key].url%>"></script>
+				<% } %>
+			<% } %>
+		<% } else if(key == "date_picker") {%>
+				<% if(page.algolia) {%>
+					<% if(theme.scripts[key].async){ %>
+						<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].callback){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
+					<%} else {%>
+						<script src="<%=theme.scripts[key].url%>"></script>
+					<% } %>				
+				<% } %>	
+		<% } else { %>
+			<% if(theme.scripts[key].async){ %>
+				<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].callback){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
+			<%} else {%>
+				<script src="<%=theme.scripts[key].url%>"></script>
+			<% } %>
 		<% } %>
 	<% } %>
 <% }); %>
 
- 
 <!-- scripts list from theme config.yml --> 
 <% Object.keys(theme.javascript).forEach(function(key) { %>
-	<script id="<%=key%>"><%-theme.javascript[key]%></script>
+	<% if(key == "instantsearchCONF"){ %>
+		<% if(is_home()){ %>
+			<script id="<%=key%>">
+			<%-theme.javascript[key]%>
+			</script>
+		<% } %>
+	<% } else if(key == "booking_form") { %>
+		<% if(page.algolia) {%>
+			<script id="<%=key%>">
+			<%-theme.javascript[key]%>
+			</script>		
+		<% }%>
+	<% }else { %>
+		<script id="<%=key%>">
+		<%-theme.javascript[key]%>
+		</script>		
+	<% } %>
 <% }); %>
 
 <!-- scripts list from theme config.yml --> 
 <% Object.keys(theme.scripts).forEach(function(key) { %>
-	<% if(theme.scripts[key].position == "bottom"){ %>
-		<% if(theme.scripts[key].hasOwnProperty("async")){ %>
-			<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].hasOwnProperty("callback")){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
-		<%} else {%>
-			<script src="<%=theme.scripts[key].url%>"></script>
+	<% if(theme.scripts[key].position == "bottom") { %>
+		<% if(key == "instantsearchJS"){ %>
+			<% if(is_home()){ %>
+				<% if(theme.scripts[key].async){ %>
+					<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].callback){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
+				<%} else {%>
+					<script src="<%=theme.scripts[key].url%>"></script>
+				<% } %>
+			<% } %>
+		<% } else if(key == "date_picker") {%>
+				<% if(page.algolia) {%>
+					<% if(theme.scripts[key].async){ %>
+						<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].callback){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
+					<%} else {%>
+						<script src="<%=theme.scripts[key].url%>"></script>
+					<% } %>				
+				<% } %>
+	
+		<% } else { %>
+			<% if(theme.scripts[key].async){ %>
+				<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].callback){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
+			<%} else {%>
+				<script src="<%=theme.scripts[key].url%>"></script>
+			<% } %>
 		<% } %>
 	<% } %>
 <% }); %>
+
 
 </body>
 </html>

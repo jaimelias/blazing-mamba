@@ -7,6 +7,18 @@
     padding-top:80px;
     min-height:100vh
 }
+.pad-20
+{
+	padding: 20px;
+}
+.pad-40
+{
+	padding: 40px;
+}
+.bottom-5
+{
+	margin-bottom: 5px;
+}
 .bottom-10
 {
 	margin-bottom: 10px;
@@ -14,6 +26,10 @@
 .bottom-20
 {
 	margin-bottom: 20px;
+}
+.bottom-40
+{
+	margin-bottom: 40px;
 }
 .pull-right
 {
@@ -39,6 +55,15 @@
 #footer{
     width:100%;
     padding:40px 0
+}
+#footer-menu
+{
+	margin: 0;
+	padding: 10px 0;
+}
+#footer-menu li:not(:last-child)
+{
+	margin-right: 10px;
 }
 .container{
     max-width:660px;
@@ -87,7 +112,7 @@
 }
 .clearfix
 {
-	overflow: auto;
+	overflow: none;
 }
 .clearfix:after{
     content: "";
@@ -174,9 +199,6 @@ h5,h6{
 .hamburger{
     margin-top:20px
 }
-#content #index{
-    padding:40px 0
-}
 .hamburger{
     height:40px
 }
@@ -216,9 +238,6 @@ h5,h6{
 }
 .hit{
     padding:20px
-}
-#index .post:not(:last-child){
-    margin-bottom:40px
 }
 #content p{
     line-height:1.8

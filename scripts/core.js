@@ -2,7 +2,82 @@
 var fs = require('hexo-fs');
 var CleanCSS = require('clean-css');
 var assign = require('object-assign');
+var algoliasearch = require('algoliasearch');
+var client = algoliasearch("47Q1KIRCHF", "9a270bdc08cc20f4290e046efe0f98d3");
+var index = client.initIndex('mamba');
+var math = require('mathjs');
+
+hexo.extend.console.register('algolia', 'Clear Algolia Index', function(args){
+	
+	index.clearIndex(function(err, content) {
+	  console.log(content);
+	});
+	
+	var source = fs.readFileSync('db.json', {encoding: 'utf8'});
+	source = JSON.parse(source);
+	source = source.models.Page;
+	var output = [];
+	
+	Object.keys(source).forEach(function(page){
+		
+		var data = source[page];
+		
+		if(data.layout == 'page')
+		{
+			if(data.hasOwnProperty('algolia'))
+			{
+				if(data.algolia == true)
+				{
+					var obj = {};
+					obj.title = data.title;
+					obj.date = parseInt((new Date(data.date).getTime() / 1000).toFixed(0));
+					obj.path = data.path.replace(/index\.html/i, '');
+					
+					obj.thumbnail = '/images/bg-logo.svg';
+					
+					if(data.hasOwnProperty('thumbnail'))
+					{
+						if(data.thumbnail)
+						{
+							obj.thumbnail = '/images/' + data.thumbnail;
+						}
+					}				
+					
+					obj.description = data.description;
+					obj.type = data.type;
+									
+					if(data.hasOwnProperty('price'))
+					{
+						if(typeof data.price == 'number')
+						{
+							obj.price = data.price;
+						}
+						else if(Array.isArray(data.price))
+						{
+							obj.price = math.min(data.price);
+						}
+						else
+						{
+							obj.price = 9999;
+						}
+					}
+					
+					output.push(obj);						
+				}			
+			}		
+		}
+	});
+	
+	setTimeout(function(){
+		index.addObjects(output, function(err, content) {
+			console.log(content.objectIDs.length + ' objects added to Algolia.');
+		});										
+	}, 600);	
+	
+});
+
 hexo.extend.helper.register('blaz', blaz_core);
+
 
 hexo.on('generateBefore', function(){
 	hexo.theme.stylesheets = assign({}, hexo.theme.stylesheets, blaz_style(this.theme.config));

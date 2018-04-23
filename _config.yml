@@ -5,8 +5,10 @@ language: es
 # main menu navigation
 menu:
   Comunidad: /comunidad/
-  Paquetes: /paquetes/
   Experiencias: /experiencias/
+  Paquetes:
+    url: /#search-box
+    id: packages-link
 
 #url, title, class, onclick
 menu_button:
@@ -14,6 +16,11 @@ menu_button:
     url: /cotizaciones/
     title: "Cotizaciones"
     class: "pure-button-primary"
+	
+footer_menu:
+  Nosotros: /nosotros/
+  Empleos: /empleos/
+  Acuerdo General: /acuerdo-general/
 
 # Miscelaneous
 logo:
@@ -36,6 +43,10 @@ stylesheets:
     - pure.css
     - media.css
     - pure-responsive-grids.css
+  datepicker:
+    - datepicker.css
+  instantsearchCSS:
+    - instantsearch.custom.css
 
 # scripts loaded in the end of the body
 #name > (url, async:async) type
@@ -43,6 +54,11 @@ scripts:
   hogan:
     url: /hogan.js
     position: top
+  date_picker:
+    url: /datepicker.min.js?ver=2
+    async: async
+    callback: date_picker()
+    position: bottom
   google_analytics:
     url: https://www.google-analytics.com/analytics.js
     async: async
@@ -57,6 +73,11 @@ scripts:
     async: async
     callback: disqus_async("jaimelias")
     position: bottom
+  instantsearchJS:
+    url: https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.5/dist/instantsearch.min.js
+    async: async
+    callback: async_instantsearch()
+    position: bottom
 	
 local_scripts:
   loadJS:
@@ -65,6 +86,8 @@ local_scripts:
     - site.js
   events:
     - events.js
+  instantsearchCONF:
+    - instantsearch.js
 
 ##remove loadCSS to hit 100% on google
 
@@ -76,6 +99,9 @@ social:
   pinterest: true
   email: true
   disqus_user: jaimelias
+  
+webhook:
+  base64_url: aHR0cHM6Ly9mbG93eG8uY29tL2hvb2tzL2EvOGp2OHlqbWc=
   
 #blog config
 hero:
@@ -89,7 +115,7 @@ hero:
       button:
         text: "Únete Gratis"
         url:
-        onclick: show_modal()
+        onclick: show_modal("subscribe")
     newsletter:
       enable: true
       title: "Expón tu talento a las marcas"
@@ -97,4 +123,4 @@ hero:
       button:
         text: "Suscríbete Gratis"
         url:
-        onclick: show_modal()
+        onclick: show_modal("subscribe")

@@ -20,7 +20,7 @@
 							<ul id="header-menu" class="pure-menu-list">
 								<% Object.keys(theme.menu).forEach(function(key) { %>
 									<li class="pure-menu-item">
-										<a class="uppercase block" href="<%=theme.menu[key]%>"><%=key%></a>
+										<a class="uppercase block" <%if(theme.menu[key].id){%>id="<%=theme.menu[key].id%>"<%}%> <%if(theme.menu[key].url){%>href="<%=theme.menu[key].url%>"<%}%> <%if(typeof theme.menu[key] === "string"){%>href="<%=theme.menu[key]%>"<%}%> ><%=key%></a>
 									</li>
 								<% }); %>
 									

@@ -1,7 +1,7 @@
 <div id="category">
   <h1><%=page.category%></h1>
   <% page.posts.each(function(article) { %>
-    <div class="category-item">
+    <div class="category-item" class="bottom-40">
       <% if (article.link) { %>
         <a href="<%=url_for(article.link)%>" target="_blank">
           <%=article.title || 'No Title'%>
