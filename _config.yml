@@ -7,7 +7,7 @@ menu:
   Comunidad: /comunidad/
   Experiencias: /experiencias/
   Paquetes:
-    url: /#search-box
+    url: /#experiences
     id: packages-link
 
 #url, title, class, onclick
@@ -21,6 +21,9 @@ footer_menu:
   Nosotros: /nosotros/
   Empleos: /empleos/
   Acuerdo General: /acuerdo-general/
+  
+algolia:
+  title: Encuentra experiencias inolvidables...
 
 # Miscelaneous
 logo:

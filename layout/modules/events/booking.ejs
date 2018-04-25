@@ -4,7 +4,7 @@
 
 	<script id="event-json-<%=key%>" type="application/json"><%- JSON.stringify(obj)%></script>
 
-	<form name="booking" data-url="<%= obj.url = blaz().canonical;%>" data-webhook="<%= theme.webhook.base64_url%>" id="event-<%= key%>" class="event box pure-form bottom-20">
+	<form name="booking" data-url="<%= obj.url = blaz().canonical;%>" data-webhook="<%= theme.webhook.base64_url%>" id="event-<%= key%>" class="event box pad-20 pure-form bottom-20">
 		
 	<input type="hidden" name="event" value="<%= page.title%>" />
 	<input type="hidden" name="package" value="<%= page.events[key].name%>" />
@@ -89,7 +89,7 @@
 			<div class="bottom-20">
 				<button onclick="toggleExtras('<%= key %>')" class="small pure-button pure-button-primary" type="button">Mostrar extras disponibles &#9660;</button>
 			</div>
-			<div id="event-addons-<%= key %>" class="hidden box bottom-20">
+			<div id="event-addons-<%= key %>" class="hidden box pad-20 bottom-20">
 				<div class="large strong bottom-20">Extras disponibles</div>
 				<% if(page.events[key].hasOwnProperty("addons")){%>
 					<% Object.keys(page.events[key].addons).forEach(function(list) { %>

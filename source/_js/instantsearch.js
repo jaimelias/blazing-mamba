@@ -15,7 +15,7 @@ document.getElementById("packages-link").addEventListener("click", function(even
 
 function check_hash()
 {	
-	if(window.location.hash == '#search-box')
+	if(window.location.hash == '#experiences')
 	{
 		return true;
 	}
@@ -24,8 +24,8 @@ function check_hash()
 function focus_searchbox()
 {	
 	var doc = document.documentElement;
-	var offset = getOffset( document.getElementById('search-box') ).top;
-	offset = offset - 100;
+	var offset = getOffset( document.getElementById('experiences') ).top;
+	offset = offset - 80;
 	document.documentElement.scrollTop = document.body.scrollTop = offset;
 	var count = 0;
 
@@ -63,7 +63,7 @@ function async_instantsearch(){
 		instantsearch.widgets.hits({
 			container: '#hits',
 			templates: {
-				empty: '<div class="empty hits-filter"><h1>No Results for <span class="light">{{query}}</span></h1></div>',
+				empty: '<div class="pad-20 hits-filter"><h1>No Results for <span class="light">{{query}}</span></h1></div>',
 				item: document.getElementById('hit-template').innerHTML
 			},
 			cssClasses: {
@@ -93,9 +93,9 @@ function async_instantsearch(){
 			  header: 'Tipo de paquete'
 			},
 			cssClasses: {
-				header: 'uppercase light small bottom-5',
+				header: 'uppercase light small bottom-10',
 				label: 'strong pointer',
-				item: 'bottom-5'
+				item: 'bottom-10'
 			}			
 		})
 	);
@@ -105,9 +105,12 @@ function async_instantsearch(){
 		container: '#price-container',
 		attributeName: 'price',
 		autoHideContainer: false,
+		templates: {
+		  header: 'Rango de precios'
+		},
 		cssClasses: {
-			root: 'width-100 clearfix'
-			},
+			header: 'uppercase light small'
+		},
 		tooltips: {
 		  format: function(rawValue) {
 			return '$' + Math.round(rawValue).toLocaleString();

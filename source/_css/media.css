@@ -86,6 +86,10 @@
 	.pure-g.gutters>[class*=pure-u]{
 		padding:0 1.5em
 	}
+	.rounded-bottom
+	{
+		border-radius: 0 0 8px 8px;
+	}
 }
 
 @media (min-width:64.1em) {
@@ -123,5 +127,9 @@
 	}
 	.pure-g.gutters>[class*=pure-u]{
 		padding:0 2em
-	}	
+	}
+	.rounded-bottom
+	{
+		border-radius: 0 0 8px 8px;
+	}
 }

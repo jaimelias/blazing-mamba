@@ -29,6 +29,7 @@ hexo.extend.console.register('algolia', 'Clear Algolia Index', function(args){
 				if(data.algolia == true)
 				{
 					var obj = {};
+					var price = 0;
 					obj.title = data.title;
 					obj.date = parseInt((new Date(data.date).getTime() / 1000).toFixed(0));
 					obj.path = data.path.replace(/index\.html/i, '');
@@ -50,17 +51,34 @@ hexo.extend.console.register('algolia', 'Clear Algolia Index', function(args){
 					{
 						if(typeof data.price == 'number')
 						{
-							obj.price = data.price;
+							price = data.price;
 						}
-						else if(Array.isArray(data.price))
+					}
+				
+					if(Object.keys(data.events[0]).length > 0)
+					{
+						if(data.events[0].price)
 						{
-							obj.price = math.min(data.price);
+							if(data.events[0].min_capacity && data.events[0].max_capacity)
+							{
+								if(price > 0)
+								{
+									price = (price / data.events[0].max_capacity);
+								}
+								price = price + data.events[0].price;
+								obj.price = parseInt(price);
+							}
+							else
+							{
+								console.log(data.title + 'has capacity error');
+							}
 						}
 						else
 						{
-							obj.price = 9999;
+							console.log(data.title + 'has no price');
 						}
 					}
+			
 					
 					output.push(obj);						
 				}			

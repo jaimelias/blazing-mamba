@@ -2,7 +2,7 @@
     background:#ccc
 }
 .box{
-    background-color:#f7f7f7;
+    background-color: rgba(0,0,0,.01);
     box-shadow:0 0 2px 1px rgba(0,0,0,.1)
 }
 .event{
@@ -24,7 +24,7 @@
 #header-menu>li>a:hover:not(.pure-button), #footer-menu a{
     color:#f7f7f7
 }
-.hero h3,.hero-follow,.pure-button-black,.pure-button-black:active,.pure-button-primary,.pure-button-primary:active,.pure-button.pure-button-black,.pure-button.pure-button-black:active,.pure-button.pure-button-primary,.pure-button.pure-button-primary:active,#footer,#footer a,#footer a:hover,#footer a:visited{
+.hero h3,.hero-follow,.pure-button-black,.pure-button-black:active,.pure-button-primary,.pure-button-primary:active,.pure-button.pure-button-black,.pure-button.pure-button-black:active,.pure-button.pure-button-primary,.pure-button.pure-button-primary:active,#footer,#footer a,#footer a:hover,#footer a:visited, .hit-search-box{
     color:#fff
 }
 .pure-button-primary:before{
@@ -52,15 +52,28 @@
 #comments,.hit,.modal-body,.post, .pure-table, .hits-filter{
     background-color:#fff
 }
-h1>a,h2>a,h3>a,h4>a{
+h1>a,h2>a,h3>a,h4>a,.hit-search-box h3{
     color:#000
 }
 .close,h1>a:hover,h2>a:hover,h3>a:hover,h4>a:hover{
-    color:#FF6037
+    color:#f00064
 }
 .modal{
     background-color:rgba(0,0,0,.6)
 }
+.hit-price, .hit-search-box
+{
+	background-color: #f00064;
+}
+.hit-price > a > span.light
+{
+	color: #fff;
+}
+.hit-price > a > span.strong
+{
+	color: #000;
+}
+
 @media (min-width:48.5em){
     #front-page-bg h1{
         text-shadow:2px 2px 4px rgba(0,0,0,.7);

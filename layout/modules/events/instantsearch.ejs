@@ -2,25 +2,27 @@
 <%-partial("modules/events/hit-template", {}, {cache: true})%>
 </script>
 
+<div id="experiences">
+	<div class="pure-g gutters">
+		<div class="pure-u-1 pure-u-md-1-3">
+			<div class="pad-20 hits-filter rounded-bottom">
+				<div id="sort-by-container" class="bottom-20"></div>
+				<div id="type-container" class="bottom-20"></div>
+				<div id="price-container" class="bottom-40"></div>
+				<div id="clear-all"></div>
+			</div>
+		</div>
+		<div class="pure-u-1 pure-u-md-2-3">
+			<div class="pad-20 hit-search-box rounded-bottom bottom-20">
+				<h3 class="uppercase"><%= theme.algolia.title%></h3>
+				<div id="search-box"></div>
+			</div>
+			<div id="hits"></div>
+		</div>
+	</div>
 
-<div class="pure-g gutters">
-	<div class="pure-u-1 pure-u-md-1-3">
-		<div class="pad-20 hits-filter">
-			<div id="sort-by-container" class="bottom-20"></div>
-			<div id="type-container" class="bottom-40"></div>
-			<div id="price-container" class="bottom-10"></div>
-			<div id="clear-all"></div>
-		</div>
-	</div>
-	<div class="pure-u-1 pure-u-md-2-3">
-		<div class="pad-20 hits-filter bottom-20">
-			<div id="search-box"></div>
-		</div>
-		<div id="hits"></div>
-	</div>
+
+	<aside class="hits-navigation bottom-40">
+		<div class="text-right" id="pagination-container" class="text-right"></div>
+	<aside>
 </div>
-
-
-<aside class="hits-navigation bottom-40">
-	<div class="text-right" id="pagination-container" class="text-right"></div>
-<aside>
