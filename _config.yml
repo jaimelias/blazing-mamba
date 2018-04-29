@@ -13,8 +13,9 @@ menu:
 #url, title, class, onclick
 menu_button:
   user:
-    url: /cotizaciones/
+    onclick: show_modal("estimates");
     title: "Cotizaciones"
+    url: "#"
     class: "pure-button-primary"
 	
 footer_menu:
@@ -24,6 +25,11 @@ footer_menu:
   
 algolia:
   title: Encuentra experiencias inolvidables...
+  
+estimates:
+  title: Cotiza con los expertos
+  button: Enviar solicitud
+  base64_url:
 
 # Miscelaneous
 logo:
