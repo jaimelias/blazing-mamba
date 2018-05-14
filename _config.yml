@@ -27,9 +27,38 @@ algolia:
   title: Encuentra experiencias inolvidables...
   
 estimates:
-  title: Cotiza con los expertos
+  title: Cotiza tu evento con los expertos
   button: Enviar solicitud
-  base64_url:
+  base64_url: aHR0cHM6Ly9mbG93eG8uY29tL2hvb2tzL2EvOGp2OHlqbWc=
+  form:
+    day:
+      type: text
+      label: Fecha
+      class: datepicker
+    hour:
+      type: select
+      label: Hora
+    participants:
+      type: number
+      label: Número de participantes
+    package:
+      type: text
+      label: Tipo de evento deseas cotizar
+    price:
+      type: number
+      label: Presupuesto ideal
+    name:
+      type: text
+      label: Nombre completo
+    email:
+      type: text
+      label: Email
+    tel:
+      type: text
+      label: Teléfono
+	  
+
+	  
 
 # Miscelaneous
 logo:
@@ -95,6 +124,8 @@ local_scripts:
     - site.js
   events:
     - events.js
+  slides:
+    - slides.js
   instantsearchCONF:
     - instantsearch.js
 

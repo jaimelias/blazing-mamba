@@ -47,28 +47,33 @@ function zoho()
 
 hexo.on('generateBefore', function(){
 
-	var source = fs.readFileSync('zoho.json', {encoding: 'utf8'});
-	source = JSON.parse(source);
-	var pages = hexo.locals.get('pages').data;
-	pages = JSON.parse(JSON.stringify(pages));
+	try
+	{
+		var pages = hexo.locals.get('pages').data;
+		pages = JSON.parse(JSON.stringify(pages));		
+		var source = fs.readFileSync('zoho.json', {encoding: 'utf8'});
+		source = JSON.parse(source);
 		
-	for(var x = 0; x < source.length; x++)
-	{
-		pages.push(source[x]);
-	}
-	
-	for(var p = 0; p < pages.length; p++)
-	{
-		if(pages[p]._content != '')
+		for(var x = 0; x < source.length; x++)
 		{
-			console.log("## Markdown is Active for pages");
-			pages[p]._content = marked(pages[p]._content);
+			pages.push(source[x]);
 		}
-	}
 		
-	hexo.locals.set('pages', function(){
-		return pages;
-	});	
+		for(var p = 0; p < pages.length; p++)
+		{
+			if(pages[p]._content != '')
+			{
+				console.log("## Markdown is Active for pages");
+				pages[p]._content = marked(pages[p]._content);
+			}
+		}
+		hexo.locals.set('pages', function(){
+			return pages;
+		});			
+	}catch(e)
+	{
+		console.log(e.message);  
+	}
 });
 
 hexo.extend.console.register('zoho', 'Clear Algolia Index', function(args){
@@ -216,7 +221,7 @@ function filter_algolia(json)
 					{
 						if(data.thumbnail)
 						{
-							obj.thumbnail = '/images/' + data.thumbnail;
+							obj.thumbnail = data.thumbnail;
 						}
 					}				
 					

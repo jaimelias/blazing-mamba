@@ -1,9 +1,10 @@
-<%if(page.slide_1){%>
-	<img class="img-responsive" width="600" height="400" alt="<%= page.title%>" src="/images/<%= page.slide_1%>" />
-<%}%>
-<%if(page.slide_2){%>
-	<img class="img-responsive" width="600" height="400" alt="<%= page.title%>" src="/images/<%= page.slide_2%>" />
-<%}%>
-<%if(page.slide_3){%>
-	<img class="img-responsive" width="600" height="400" alt="<%= page.title%>" src="/images/<%= page.slide_3%>" />
-<%}%>
+<div class="slideshow bottom-20">
+	<%if(page.slides){%>
+		
+		<% Object.keys(page.slides).forEach(function(key) { %>
+			<div class="slides"><img class="img-responsive" width="600" height="400" alt="<%= page.title%>" src="/images/<%= page.slides[key]%>" /></div>
+		<%});%>
+	<%} else { %>	
+		<img class="img-responsive" width="600" height="400" alt="<%= page.title%>" src="/images/bg-logo.svg" />
+	<% } %>
+</div>

@@ -290,13 +290,9 @@ h5,h6{
 	height: 100%;
 }
 .modal-wrap{
-    margin: 15% auto;
+    margin: 0 auto;
     width: 600px;
 	max-width: 100%;
-}
-.modal-body
-{
-	padding: 40px;
 }
 .modal-title
 {
@@ -305,10 +301,6 @@ h5,h6{
 .modal-footer
 {
 	padding-top: 20px;
-}
-.modal-content
-{
-	margin: 20px 0;
 }
 .modal-close {
     float: right;

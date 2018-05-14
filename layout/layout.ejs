@@ -10,12 +10,6 @@
 			<% if(is_home()){ %>
 				<style id="<%=key%>"><%-theme.css[key]%></style>
 			<% } %>
-		<% } else if(key == "datepicker") {%>
-			<% if(page.algolia) {%>
-				<% if(page.algolia == true) {%>
-					<style id="<%=key%>"><%-theme.css[key]%></style>
-				<% } %>
-			<% } %>
 		<% } else { %>
 			<style id="<%=key%>"><%-theme.css[key]%></style>
 		<% } %>
@@ -77,6 +71,7 @@
 <%-partial("partials/menu", {}, {cache: true})%>
 <%-partial("forms/subscribe", {}, {cache: true})%>
 <%-partial("forms/estimates", {}, {cache: true})%>
+<%-partial("modules/events/response")%>
 
 
 <!-- scripts list from theme config.yml --> 
@@ -90,14 +85,6 @@
 					<script src="<%=theme.scripts[key].url%>"></script>
 				<% } %>
 			<% } %>
-		<% } else if(key == "date_picker") {%>
-				<% if(page.algolia) {%>
-					<% if(theme.scripts[key].async){ %>
-						<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].callback){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
-					<%} else {%>
-						<script src="<%=theme.scripts[key].url%>"></script>
-					<% } %>				
-				<% } %>	
 		<% } else { %>
 			<% if(theme.scripts[key].async){ %>
 				<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].callback){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
@@ -140,15 +127,6 @@
 					<script src="<%=theme.scripts[key].url%>"></script>
 				<% } %>
 			<% } %>
-		<% } else if(key == "date_picker") {%>
-				<% if(page.algolia) {%>
-					<% if(theme.scripts[key].async){ %>
-						<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].callback){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>
-					<%} else {%>
-						<script src="<%=theme.scripts[key].url%>"></script>
-					<% } %>				
-				<% } %>
-	
 		<% } else { %>
 			<% if(theme.scripts[key].async){ %>
 				<script>loadJS("<%=theme.scripts[key].url%>"<% if(theme.scripts[key].callback){ %>, function(){<%-theme.scripts[key].callback%>}<%}%>)</script>

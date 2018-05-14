@@ -4,7 +4,11 @@ function date_picker()
 {	
 	[].forEach.call(document.getElementsByClassName('datepicker'), function (el) {
 		el.DatePickerX.init({
-		mondayFirst: true
+		mondayFirst: true,
+		minDate: new Date(),
+		singleMonthLabels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+		todayButton: false,
+		clearButton: false
 		});	
 	});	
 }
@@ -29,6 +33,7 @@ function toggleExtras(event_id)
 
 function booking_submit(event_id)
 {
+	console.log(event_id);
 	merge_addons(event_id);
 	calculate_total(event_id);
 	var event_form = document.getElementById("event-"+event_id);
@@ -57,6 +62,7 @@ function booking_submit(event_id)
 				else
 				{
 					output[fields[x].name] = field_value;
+					fields[x].classList.remove('validation_error');
 				}
 			}
 			else
@@ -84,50 +90,59 @@ function booking_submit(event_id)
 function merge_addons(event_id)
 {
 	var event_form = document.getElementById("event-"+event_id);
-	var fields = event_form.querySelectorAll("select.addon");
-	var output = '';
 	
-	for(var x = 0; x < fields.length; x++)
+	if(event_form !== null)
 	{
-		if(parseInt(fields[x].value) > 0)
+		var fields = event_form.querySelectorAll("select.addon");
+		var output = '';
+		
+		for(var x = 0; x < fields.length; x++)
 		{
-			var item = '';
-			
-			if(x > 0)
+			if(parseInt(fields[x].value) > 0)
 			{
-				item += '\n';
+				var item = '';
+				
+				if(x > 0)
+				{
+					item += '\n';
+				}
+				item += fields[x].getAttribute('data-name');
+				item += ': ';
+				item += fields[x].value;
+				output += item;			
 			}
-			item += fields[x].getAttribute('data-name');
-			item += ': ';
-			item += fields[x].value;
-			output += item;			
 		}
+		[].forEach.call(document.getElementsByName('addons'), function (el) {
+			if(output != '')
+			{
+				el.innerHTML = output;
+			}
+		});		
 	}
-	[].forEach.call(document.getElementsByName('addons'), function (el) {
-		if(output != '')
-		{
-			el.innerHTML = output;
-		}
-	});
 }
 function calculate_total(event_id)
 {
 	var total = 0;
-	var json = JSON.parse(document.getElementById('event-json-' + event_id).innerHTML);
-	var participants = document.getElementById('event-participants-' + event_id).value;	
-	total = json.base_price + (json.event_price * participants);
+	var json = document.getElementById('event-json-' + event_id);
 	
-	[].forEach.call(document.getElementsByClassName('addon-'+event_id), function (el, index) {
+	if(json !== null)
+	{
+		json = JSON.parse(json.innerHTML);
+		var participants = document.getElementById('event-participants-' + event_id).value;	
+		total = json.base_price + (json.event_price * participants);
 		
-		if(parseInt(el.value) > 0)
-		{
-			total = total + (el.value * json.addons[index].price);
-		}
-	});	
-	
-	[].forEach.call(document.getElementsByName('price'), function (el) {
-		el.value = total;
-	});
+		[].forEach.call(document.getElementsByClassName('addon-'+event_id), function (el, index) {
+			
+			if(parseInt(el.value) > 0)
+			{
+				total = total + (el.value * json.addons[index].price);
+			}
+		});	
+		
+		[].forEach.call(document.getElementsByName('price'), function (el) {
+			el.value = total;
+		});		
+	}
 }
 function calculate_vars(event_id)
 {
@@ -251,6 +266,7 @@ function ajax_post(json)
 		{
 			console.log(xhr.responseText);
 			show_modal('response');
+			show_modal('estimates');
 		}
 		else
 		{

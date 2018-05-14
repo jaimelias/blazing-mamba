@@ -1,36 +1,44 @@
 <aside id="estimates" class="modal hidden">
 	<div class="modal-wrap">
-		<form id="email_subscribe" class="modal-body pure-form">
+		<form id="event-estimate" class="modal-body pure-form" data-url="<%= blaz().canonical;%>" data-webhook="<%= theme.estimates.base64_url%>">
 			<div class="modal-title large clearfix strong uppercase"><%= theme.estimates.title%> <span class="modal-close" onclick="show_modal('estimates')">&times;</span></div>
 			<div class="modal-content light">
-			
-				<div class="bottom-10">
+				<input type="hidden" name="event" value="Cotización a la medida" />
+				<div class="bottom-5">
 					<div class="pure-g gutters">
-						<div class="pure-u-1 pure-u-md-1-2">
-							<label>Nombre completo</label>
-							<input type="text" name="name" class="width-100"/>					
-						</div>
-						<div class="pure-u-1 pure-u-md-1-2">
-							<label>Email</label>
-							<input type="email" name="email" class="width-100"/>
-						</div>
+						<% var count = 0; %>
+						<% Object.keys(theme.estimates.form).forEach(function(key) { 
+								var field = theme.estimates.form[key]; 
+								count ++;
+						%>	
+							<div class="pure-u-1 pure-u-sm-1-2">
+								<div class="bottom-5">
+									<label class="block bottom-5"><%= field.label %></label>
+									<% if(field.type == "text" || field.type == "number"){%>
+										<input type="<%= field.type %>" class="width-100 <%= field.class %>" name="<%= key%>" />
+									<% } %>
+									<% if(field.type == "select"){%>
+										<select class="width-100 <%= field.class %>" name="<%= key%>">
+											<option>--</option>
+										</select>
+									<% } %>
+								</div>
+							</div>
+							
+							<%if(count == 2){ count=0;%></div><div class="pure-g gutters"><%}%>
+							
+							
+						<% }); %>
 					</div>
 				</div>
-				<div class="bottom-10">	
-					<div class="pure-g gutters">
-						<div class="pure-u-1 pure-u-md-1-2">
-							<label>Teléfono</label>
-							<input type="text" name="tel" class="width-100"/>					
-						</div>
-						<div class="pure-u-1 pure-u-md-1-2">
-							<label>Participantes</label>
-							<input type="number" name="participants" class="width-100"/>	
-						</div>
-					</div>	
+				<div>
+					<label>Cómo te imaginas tu evento?</label>
+					<textarea name="description" class="width-100"></textarea>
 				</div>
+				
 			</div>
 			<div class="modal-footer light">
-				<button type="submit" class="pure-button pure-button-black"><%= theme.estimates.button%></button>
+				<button onclick="booking_submit('estimate')" type="button" class="pure-button pure-button-black"><%= theme.estimates.button%></button>
 			</div>
 		</form>
 	</div>
