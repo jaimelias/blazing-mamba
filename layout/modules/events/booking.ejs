@@ -1,38 +1,40 @@
-<% Object.keys(page.events).forEach(function(key) { %>
+<% Object.keys(page.sub_packages).forEach(function(key) { %>
 
-	<% var obj = {}; obj.title = page.title; obj.name = page.events[key].name; obj.base_price = page.price; obj.event_price = page.events[key].price; obj.addons = page.events[key].addons;%>
+	<% var obj = {}; obj.title = page.title; obj.name = page.sub_packages[key].name; obj.base_price = page.price; obj.event_price = page.sub_packages[key].price; obj.addons = page.sub_packages[key].add_ons;%>
 
 	<script id="event-json-<%=key%>" type="application/json"><%- JSON.stringify(obj)%></script>
 
 	<form name="booking" data-url="<%= blaz().canonical;%>" data-webhook="<%= theme.webhook.base64_url%>" id="event-<%= key%>" class="event box pad-20 pure-form bottom-20">
 		
 	<input type="hidden" name="event" value="<%= page.title%>" />
-	<input type="hidden" name="package" value="<%= page.events[key].name%>" />
-	<input type="hidden" name="description" value="<%= page.events[key].description%>" />
-	<input type="hidden" name="includes" value="<%= JSON.stringify(page.events[key].includes)%>" />
+	<input type="hidden" name="package" value="<%= page.sub_packages[key].name%>" />
+	<input type="hidden" name="description" value="<%= page.sub_packages[key].description%>" />
+	<input type="hidden" name="includes" value="<%= JSON.stringify(page.sub_packages[key].includes)%>" />
 	<textarea class="hidden" name="addons">NO</textarea>
 	<input type="hidden" name="price" />
 	
 		<div class="event-header bottom-20">
-			<h4 class="large uppercase"><%=(parseInt(key)+1)%> <%= page.events[key].name%></h4>
-			<p class="small"><%= page.events[key].description%></p>
+			<h4 class="large uppercase"><%=(parseInt(key)+1)%> <%= page.sub_packages[key].name%></h4>
+			<p class="small"><%= page.sub_packages[key].description%></p>
 			<div class="pure-g gutters">
 				<div class="pure-u-1 pure-u-sm-1-3">
-					<img width="150" height="100" class="img-responsive" alt="<%= page.events[key].name%>" src="/images/<%= page.events[key].thumbnail%>" />
+					<img width="150" height="100" class="img-responsive" alt="<%= page.sub_packages[key].name%>" src="/images/<%= page.sub_packages[key].thumbnail%>" />
 				</div>
 				<div class="pure-u-1 pure-u-sm-2-3">
 					<div class="strong">Incluye:</div>
 					<ul class="small">
-						<% Object.keys(page.events[key].includes).forEach(function(list) { %>
-							<li><%= page.events[key].includes[list]%></li>
+						<% Object.keys(page.sub_packages[key].includes).forEach(function(list) { %>
+							<% if(page.sub_packages[key].includes[list]) {%>
+								<li><%= page.sub_packages[key].includes[list]%></li>
+							<% } %>
 						<%});%>
 					</ul>
 					
-					<% if(page.events[key].hasOwnProperty("addons")){%>
+					<% if(page.sub_packages[key].hasOwnProperty("add_ons")){%>
 						<div class="strong text-muted">Extras Disponibles:</div>
 						<ul class="text-muted small">
-							<% Object.keys(page.events[key].addons).forEach(function(list) { %>
-								<li><%= page.events[key].addons[list].name%> ($<%= page.events[key].addons[list].price%> c/u)</li>
+							<% Object.keys(page.sub_packages[key].add_ons).forEach(function(list) { %>
+								<li><%= page.sub_packages[key].add_ons[list].name%> ($<%= page.sub_packages[key].add_ons[list].price%> c/u)</li>
 							<%});%>
 						</ul>
 					<% } %>
@@ -62,8 +64,8 @@
 						<label>Participantes</label>
 						<select onchange="calculate_vars(<%=key%>)" id="event-participants-<%=key%>" name="participants" class="width-100">
 							<option>--</option>
-							<% if(page.events[key].min_capacity < page.events[key].max_capacity){ %>
-								<% for(var x = 0; x < page.events[key].max_capacity; x++) {%>
+							<% if(page.sub_packages[key].min_capacity < page.sub_packages[key].max_capacity){ %>
+								<% for(var x = 0; x < page.sub_packages[key].max_capacity; x++) {%>
 									<option value="<%= (x+1) %>"><%= (x+1) %></option>
 								<% } %>
 							<% } %>
@@ -91,15 +93,16 @@
 			</div>
 			<div id="event-addons-<%= key %>" class="hidden box pad-20 bottom-20">
 				<div class="large strong bottom-20">Extras disponibles</div>
-				<% if(page.events[key].hasOwnProperty("addons")){%>
-					<% Object.keys(page.events[key].addons).forEach(function(list) { %>
+				<% if(page.sub_packages[key].hasOwnProperty("add_ons")){%>
+									
+					<% Object.keys(page.sub_packages[key].add_ons).forEach(function(list) { %>
 						<div class="bottom-10">
-							<label><select data-name="<%= page.events[key].addons[list].name%>" onchange="calculate_vars(<%=key%>)" class="addon addon-<%=key%>" name="addon-<%=key%>-<%=list%>">
+							<label><select data-name="<%= page.sub_packages[key].add_ons[list].name%>" onchange="calculate_vars(<%=key%>)" class="addon addon-<%=key%>" name="addon-<%=key%>-<%=list%>">
 								<option value="0">0</option>
-								<%for(var x = 0; x < page.events[key].addons[list].max; x++){%>
+								<%for(var x = 0; x < page.sub_packages[key].add_ons[list].max; x++){%>
 									<option value="<%=(x+1)%>"><%=(x+1)%></option>
 								<% } %>
-							</select> <%= page.events[key].addons[list].name%> ($<%= page.events[key].addons[list].price%> c/u)</label>		
+							</select> <%= page.sub_packages[key].add_ons[list].name%> ($<%= page.sub_packages[key].add_ons[list].price%> c/u)</label>		
 						</div>
 					<%});%>
 				<% } %>

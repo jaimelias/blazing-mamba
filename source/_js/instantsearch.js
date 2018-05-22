@@ -88,7 +88,7 @@ function async_instantsearch(){
 	search.addWidget(
 		instantsearch.widgets.refinementList({
 			container: '#type-container',
-			attributeName: 'type',
+			attributeName: 'categories',
 			templates: {
 			  header: 'Tipo de paquete'
 			},
