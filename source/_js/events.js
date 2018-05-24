@@ -152,14 +152,44 @@ function calculate_vars(event_id)
 	var template = Hogan.compile(document.getElementById('breakdown-template').innerHTML);
 	var json = JSON.parse(document.getElementById('event-json-' + event_id).innerHTML);
 	var participants = document.getElementById('event-participants-' + event_id).value;
-	participants = participants != '--' ? parseInt(participants) : 0;	
-	total = json.base_price + (json.event_price * participants);
+	participants = participants != '--' ? parseInt(participants) : 0;
 	
+	if(json.hasOwnProperty('spaces'))
+	{
+		if(json.spaces[0].hasOwnProperty('name') && json.spaces[0].hasOwnProperty('price'))
+		{
+			if(json.hasOwnProperty('base_price'))
+			{
+				json.base_price = json.base_price + json.spaces.price;
+				console.log(json.base_price);
+			}
+			else
+			{
+				json.base_price = json.spaces[0].price;
+			}
+		}
+	}		
+	
+	if(json.hasOwnProperty('base_price'))
+	{
+		total = json.base_price;
+	}
+	
+	total = total + (json.event_price * participants);
 	
 	if(json.base_price > 0)
 	{
 		var base = {};
 		base.description = json.title;
+		
+		if(json.hasOwnProperty('spaces'))
+		{
+			if(json.spaces[0].hasOwnProperty('name') && json.spaces[0].hasOwnProperty('price'))
+			{
+				base.description += ' ['+json.spaces[0].name+']';
+			}
+		}
+		
 		base.quantity = 1;
 		base.price = json.base_price;
 		base.subtotal = json.base_price;
@@ -188,7 +218,7 @@ function calculate_vars(event_id)
 		}
 
 	});
-		
+	
 	obj.total = total;
 	obj.participants = participants;
 	

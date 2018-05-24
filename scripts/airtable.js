@@ -26,6 +26,7 @@ function airtable()
 	obj.views.sub_packages = 'Sub Packages';
 	obj.views.add_ons = 'Add-ons';
 	obj.views.categories = 'Categories';
+	obj.views.spaces = 'Spaces';
 	obj.url = function(view){
 		return encodeURI('https://api.airtable.com/v0/'+this.base+'/'+view+'?api_key='+this.api);
 	};
@@ -82,6 +83,7 @@ hexo.extend.console.register('airtable', 'Clear Algolia Index', function(args){
 	urls.push(Airtable.url(Airtable.views.sub_packages));
 	urls.push(Airtable.url(Airtable.views.add_ons));
 	urls.push(Airtable.url(Airtable.views.categories));
+	urls.push(Airtable.url(Airtable.views.spaces));
 	
 	async.map(urls, function(url, cb) {
 	  https.get(url, function(res) {
@@ -116,6 +118,10 @@ hexo.extend.console.register('airtable', 'Clear Algolia Index', function(args){
 			if(x == 3)
 			{
 				input.categories = responses[x];
+			}
+			if(x == 4)
+			{
+				input.spaces = responses[x];
 			}			
 		}
 
@@ -145,8 +151,19 @@ hexo.extend.console.register('airtable', 'Clear Algolia Index', function(args){
 					}
 				}
 			}
+			if(input.sub_packages[y].fields.hasOwnProperty('spaces'))
+			{
+				var spaces = [];
+				for(var i = 0; i < input.sub_packages[y].fields.spaces.length; i++)
+				{
+					var item = findObjectByKey(input.spaces, 'id', input.sub_packages[y].fields.spaces[i]);
+					item = item.fields;
+					spaces.push(item);
+				}
+				input.sub_packages[y].fields.spaces =  spaces;
+			}
 		}
-												
+														
 		for(var x = 0; x < input.packages.length; x++)
 		{
 			if(input.packages[x].fields.hasOwnProperty('sub_packages'))

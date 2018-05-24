@@ -1,6 +1,6 @@
 <% Object.keys(page.sub_packages).forEach(function(key) { %>
 
-	<% var obj = {}; obj.title = page.title; obj.name = page.sub_packages[key].name; obj.base_price = page.price; obj.event_price = page.sub_packages[key].price; obj.addons = page.sub_packages[key].add_ons;%>
+	<% var obj = {}; obj.title = page.title; obj.name = page.sub_packages[key].name; obj.base_price = page.price; obj.event_price = page.sub_packages[key].price; obj.addons = page.sub_packages[key].add_ons; obj.spaces = page.sub_packages[key].spaces;%>
 
 	<script id="event-json-<%=key%>" type="application/json"><%- JSON.stringify(obj)%></script>
 
@@ -16,9 +16,16 @@
 		<div class="event-header bottom-20">
 			<h4 class="large uppercase"><%=(parseInt(key)+1)%> <%= page.sub_packages[key].name%></h4>
 			<p class="small"><%= page.sub_packages[key].description%></p>
+			
+			<%if(page.sub_packages[key].spaces){ var spaces = page.sub_packages[key].spaces[0]; %>
+				<% if(spaces.name && spaces.price){%>
+					<p class="small"><strong>Ubicación:</strong> <%= spaces.name%></p>
+				<% } %>
+			<%}%>
+			
 			<div class="pure-g gutters">
 				<div class="pure-u-1 pure-u-sm-1-3">
-					<img width="150" height="100" class="img-responsive" alt="<%= page.sub_packages[key].name%>" src="/images/<%= page.sub_packages[key].thumbnail%>" />
+					<img width="150" height="100" class="img-responsive" alt="<%= page.sub_packages[key].name%>" src="/images/<%if(page.sub_packages[key].thumbnail){%><%= page.sub_packages[key].thumbnail%><%} else{%>bg-logo.svg<%}%>" />
 				</div>
 				<div class="pure-u-1 pure-u-sm-2-3">
 					<div class="strong">Incluye:</div>
@@ -29,6 +36,7 @@
 							<% } %>
 						<%});%>
 					</ul>
+					
 					
 					<% if(page.sub_packages[key].hasOwnProperty("add_ons")){%>
 						<div class="strong text-muted">Extras Disponibles:</div>
@@ -87,10 +95,11 @@
 					</div>
 				</div>
 			</div>
-			
-			<div class="bottom-20">
-				<button onclick="toggleExtras('<%= key %>')" class="small pure-button pure-button-primary" type="button">Mostrar extras disponibles &#9660;</button>
-			</div>
+			<% if(page.sub_packages[key].hasOwnProperty("add_ons")){%>
+				<div class="bottom-20">
+					<button onclick="toggleExtras('<%= key %>')" class="small pure-button pure-button-primary" type="button">Mostrar extras disponibles &#9660;</button>
+				</div>
+			<% } %>
 			<div id="event-addons-<%= key %>" class="hidden box pad-20 bottom-20">
 				<div class="large strong bottom-20">Extras disponibles</div>
 				<% if(page.sub_packages[key].hasOwnProperty("add_ons")){%>
