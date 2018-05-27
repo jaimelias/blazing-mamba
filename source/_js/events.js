@@ -160,8 +160,7 @@ function calculate_vars(event_id)
 		{
 			if(json.hasOwnProperty('base_price'))
 			{
-				json.base_price = json.base_price + json.spaces.price;
-				console.log(json.base_price);
+				json.base_price = json.base_price + json.spaces[0].price;
 			}
 			else
 			{
