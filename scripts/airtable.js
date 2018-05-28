@@ -261,7 +261,6 @@ function filter_algolia(json)
 					obj.title = data.title;
 					obj.date = parseInt((new Date(data.date).getTime() / 1000).toFixed(0));
 					obj.path = data.path.replace(/index\.html/i, '');
-					
 					obj.thumbnail = '/images/bg-logo.svg';
 					
 					if(data.hasOwnProperty('thumbnail'))
@@ -284,24 +283,23 @@ function filter_algolia(json)
 					}
 								
 					if(data.hasOwnProperty('sub_packages'))
-					{
+					{	
 						if(data.sub_packages.length > 0)
 						{
-							if(data.sub_packages[0].price)
+							if(data.sub_packages[0].hasOwnProperty('price'))
 							{
-								if(data.sub_packages[0].min_capacity && data.sub_packages[0].max_capacity)
-								{
+									obj.per_person = true;
+									
 									if(price > 0)
 									{
 										price = (price / data.sub_packages[0].max_capacity);
 									}
 									price = price + data.sub_packages[0].price;
-									obj.price = parseInt(price);
-								}
-								else
-								{
-									console.log(data.title + 'has capacity error');
-								}
+									
+									if(data.sub_packages[0].hasOwnProperty('spaces'))
+									{
+										price = price + (data.sub_packages[0].spaces[0].price/data.sub_packages[0].max_capacity);
+									}	
 							}
 							else
 							{
@@ -309,7 +307,8 @@ function filter_algolia(json)
 							}
 						}						
 					}
-	
+					
+					obj.price = parseInt(price);
 					output.push(obj);						
 				}			
 			}		

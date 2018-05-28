@@ -69,15 +69,19 @@
 						<input type="text" name="tel" class="width-100"/>
 					</div>
 					<div class="pure-u-1 pure-u-sm-1-2">
-						<label>Participantes</label>
-						<select onchange="calculate_vars(<%=key%>)" id="event-participants-<%=key%>" name="participants" class="width-100">
-							<option>--</option>
-							<% if(page.sub_packages[key].min_capacity < page.sub_packages[key].max_capacity){ %>
-								<% for(var x = 0; x < page.sub_packages[key].max_capacity; x++) {%>
-									<option value="<%= (x+1) %>"><%= (x+1) %></option>
+						<% if(page.sub_packages[key].min_capacity && page.sub_packages[key].max_capacity) {%>
+							<label>Personas</label>
+							<select onchange="calculate_vars('<%=key%>')" id="event-participants-<%=key%>" name="participants" class="width-100">
+								<option>--</option>
+								<% if(page.sub_packages[key].min_capacity < page.sub_packages[key].max_capacity){ %>
+									<% for(var x = 0; x < page.sub_packages[key].max_capacity; x++) {%>
+										<option value="<%= (x+1) %>"><%= (x+1) %></option>
+									<% } %>
 								<% } %>
-							<% } %>
-						</select>
+							</select>
+						<%} else {%>
+							<input type="hidden" id="event-participants-<%=key%>" value="1" name="participants" />
+						<% } %>
 					</div>
 				</div>
 			</div>				
@@ -102,8 +106,7 @@
 			<% } %>
 			<div id="event-addons-<%= key %>" class="hidden box pad-20 bottom-20">
 				<div class="large strong bottom-20">Extras disponibles</div>
-				<% if(page.sub_packages[key].hasOwnProperty("add_ons")){%>
-									
+				<% if(page.sub_packages[key].hasOwnProperty("add_ons")){%>					
 					<% Object.keys(page.sub_packages[key].add_ons).forEach(function(list) { %>
 						<div class="bottom-10">
 							<label><select data-name="<%= page.sub_packages[key].add_ons[list].name%>" onchange="calculate_vars(<%=key%>)" class="addon addon-<%=key%>" name="addon-<%=key%>-<%=list%>">
@@ -126,7 +129,7 @@
 		</div>
 		
 		<div id="event-show-<%= key %>">
-			<button onclick="toggleEvent('<%= key %>')" class="uppercase strong pure-button pure-button-primary block width-100" type="button">Lo quiero</button>
+			<button onclick="calculate_vars('<%=key%>'); toggleEvent('<%= key %>')" class="uppercase strong pure-button pure-button-primary block width-100" type="button">Lo quiero</button>
 		</div>
 		
 	</form>

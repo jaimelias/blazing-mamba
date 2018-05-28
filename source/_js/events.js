@@ -153,6 +153,10 @@ function calculate_vars(event_id)
 	var json = JSON.parse(document.getElementById('event-json-' + event_id).innerHTML);
 	var participants = document.getElementById('event-participants-' + event_id).value;
 	participants = participants != '--' ? parseInt(participants) : 0;
+	var item = {};
+	item.description = json.title;
+	item.quantity = 1;
+	item.price = 0;
 	
 	if(json.hasOwnProperty('spaces'))
 	{
@@ -160,7 +164,10 @@ function calculate_vars(event_id)
 		{
 			if(json.hasOwnProperty('base_price'))
 			{
-				json.base_price = json.base_price + json.spaces[0].price;
+				if(json.base_price > 0)
+				{
+					json.base_price = json.base_price + json.spaces[0].price;
+				}
 			}
 			else
 			{
@@ -171,36 +178,33 @@ function calculate_vars(event_id)
 	
 	if(json.hasOwnProperty('base_price'))
 	{
+		item.price = json.base_price;
+		item.subtotal = json.base_price;		
 		total = json.base_price;
-	}
-	
-	total = total + (json.event_price * participants);
-	
-	if(json.base_price > 0)
-	{
-		var base = {};
-		base.description = json.title;
-		
+
 		if(json.hasOwnProperty('spaces'))
 		{
 			if(json.spaces[0].hasOwnProperty('name') && json.spaces[0].hasOwnProperty('price'))
 			{
-				base.description += ' ['+json.spaces[0].name+']';
+				item.description += ' ['+json.spaces[0].name+']';
 			}
 		}
 		
-		base.quantity = 1;
-		base.price = json.base_price;
-		base.subtotal = json.base_price;
-		obj.items.push(base);		
 	}
 	
-	var item = {};
-	item.description = json.name;
-	item.quantity = participants;
-	item.price = json.event_price;
-	item.subtotal = json.event_price * participants;
+	if(json.hasOwnProperty('event_price'))
+	{
+		item.description += ': '+json.name;
+		item.quantity = participants;
+		item.price = json.event_price + (item.price/participants);
+		item.subtotal = item.price * participants;
+		item.subtotal = item.subtotal.toFixed(2);
+		total = item.subtotal;
+	}	
+	
+	item.price = item.price.toFixed(2);
 	obj.items.push(item);
+
 
 	[].forEach.call(document.getElementsByClassName('addon-'+event_id), function (el, index) {
 		
@@ -215,7 +219,6 @@ function calculate_vars(event_id)
 			total = total + (item.subtotal);
 			obj.items.push(item);
 		}
-
 	});
 	
 	obj.total = total;
