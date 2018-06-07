@@ -85,6 +85,8 @@ stylesheets:
     - datepicker.css
   instantsearchCSS:
     - instantsearch.custom.css
+  slidesCSS:
+    - slides.css
 
 # scripts loaded in the end of the body
 #name > (url, async:async) type

@@ -173,6 +173,12 @@ hexo.extend.console.register('airtable', 'Clear Algolia Index', function(args){
 				{
 					var item = findObjectByKey(input.sub_packages, 'id', input.packages[x].fields.sub_packages[y]);
 					item = item.fields;
+					
+					if(item.hasOwnProperty('thumbnail'))
+					{
+						item.thumbnail = item.thumbnail.replace(/http\:/, "https:");
+					}
+										
 					sub_packages.push(item);
 				}		
 				input.packages[x].fields.sub_packages = sub_packages;					
@@ -195,7 +201,22 @@ hexo.extend.console.register('airtable', 'Clear Algolia Index', function(args){
 		for(var e = 0; e < input.packages.length; e++)
 		{
 			var item = input.packages[e].fields;
-
+			
+			
+			item.gallery = [];
+			
+			for(var k in item)
+			{	
+				if(typeof item[k] === 'string')
+				{	
+					if(k.match(/slide/i))
+					{
+						item.gallery.push(item[k].replace(/http\:/, 'https:'));
+						delete item[k];
+					}
+				}
+			}			
+			
 			if(item.hasOwnProperty('sub_packages'))
 			{
 				if(item.sub_packages.length > 0)
@@ -207,6 +228,12 @@ hexo.extend.console.register('airtable', 'Clear Algolia Index', function(args){
 					item.date = '';
 					item._id = input.packages[e].id;
 					item._content = input.packages[e].fields.content;
+					
+					if(item.hasOwnProperty('thumbnail'))
+					{
+						item.thumbnail = item.thumbnail.replace(/http\:/, "https:");
+					}
+					
 					delete input.packages[e].fields.content;
 					output.push(item);				
 					

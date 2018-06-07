@@ -1,10 +1,15 @@
-<div class="slideshow bottom-20">
-	<%if(page.slides){%>
-		
-		<% Object.keys(page.slides).forEach(function(key) { %>
-			<div class="slides"><img class="img-responsive" width="600" height="400" alt="<%= page.title%>" src="/images/<%= page.slides[key]%>" /></div>
-		<%});%>
-	<%} else { %>	
-		<img class="img-responsive" width="600" height="400" alt="<%= page.title%>" src="/images/bg-logo.svg" />
+<% if(page.gallery) {%>
+	<% if(page.gallery.length > 0) {%>
+		<div id="package_slideshow" class="slideshow bottom-20">
+
+			<% for(var x = 0; x < page.gallery.length; x++) {%>
+				<div class="slides"><img class="img-responsive" width="600" height="400" alt="<%= page.title%>" src="<%= page.gallery[x]%>" /></div>	
+			<% } %>
+			<a class="next pure-button pure-button-primary" onclick="plusSlides(+1, 'package_slideshow')">&#10095;</a>
+		</div>
+	<% } else {%>
+		<img width="600" height="400" class="img-responsive" alt="<%= page.title%>" src="/images/bg-logo.svg">
 	<% } %>
-</div>
+<% } else { %>
+	<img width="600" height="400" class="img-responsive" alt="<%= page.title%>" src="/images/bg-logo.svg">
+<% } %>

@@ -1,11 +1,31 @@
+var slideIndex = 0;
 
-[].forEach.call(document.getElementsByClassName('slideshow'), function (slide) {
+function plusSlides(n, id) {	
+    showDivs((slideIndex += n), id);
+}
+
+function showDivs(n, id) {
+
+	var slideshow = document.getElementById(id);
+	var x = slideshow.querySelectorAll('.slides');
 	
-	var item = slide.querySelectorAll('.slides');
-	
-	if(item.length > 0)
+	if(x.length > 0)
 	{
-		console.log(item);
-		//https://www.w3schools.com/howto/howto_js_slideshow.asp
+		
+		if (n > x.length)
+		{
+			slideIndex = 1;
+		}
+		if (n < 1)
+		{
+			slideIndex = x.length;
+		}
+		
+		for (var i = 0; i < x.length; i++)
+		{
+			x[i].style.display = 'none'; 
+		}
+		
+		x[slideIndex-1].style.display = 'block';
 	}
-});
+}

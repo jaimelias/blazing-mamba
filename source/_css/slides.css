@@ -1,0 +1,13 @@
+.slideshow
+{
+	position: relative;
+}
+.slideshow > .slides, .slideshow > .next 
+{
+	position: absolute;
+}
+.slideshow > .next
+{
+	top: 0;
+	right: 0;
+}
