@@ -23,14 +23,16 @@
 					<div class="sharethis-inline-share-buttons"></div>
 				</div>
 				<div class="pure-u-1 pure-u-md-1-2">
-					<%-partial("partials/slides")%>
+					<%-partial("partials/slides", {slides: page.gallery, slide_id: "package_slide"})%>
 					<div class="bottom-20">
 						<%-page._content%>
 					</div>
 				</div>
 			</div>
 		<% } else {%>
-			<%-partial("partials/slides")%>
+			<div class="bottom-20">
+				<%-partial("partials/slides", {slides: page.gallery, slide_id: "package_slide"})%>
+			</div>
 			<%-page._content%>
 		<% }%>
 	

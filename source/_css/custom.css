@@ -7,7 +7,6 @@
     padding-top:80px;
     min-height:100vh
 }
-
 .pad-10
 {
 	padding: 10px;
@@ -342,4 +341,8 @@ h5,h6{
 .rounded
 {
 	border-radius: 8px;
+}
+pre
+{
+	white-space: pre-wrap;
 }

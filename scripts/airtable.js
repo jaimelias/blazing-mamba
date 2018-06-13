@@ -162,6 +162,22 @@ hexo.extend.console.register('airtable', 'Clear Algolia Index', function(args){
 				}
 				input.sub_packages[y].fields.spaces =  spaces;
 			}
+			if(input.sub_packages[y].fields.hasOwnProperty('thumbnail'))
+			{
+				input.sub_packages[y].fields.gallery = [];
+				
+				for(var k in input.sub_packages[y].fields)
+				{	
+					if(typeof input.sub_packages[y].fields[k] === 'string')
+					{	
+						if(k.match(/slide/i))
+						{
+							input.sub_packages[y].fields.gallery.push(input.sub_packages[y].fields[k].replace(/http\:/, 'https:'));
+							delete input.sub_packages[y].fields[k];
+						}
+					}
+				}	
+			}
 		}
 														
 		for(var x = 0; x < input.packages.length; x++)

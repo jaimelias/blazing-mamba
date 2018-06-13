@@ -1,15 +1,19 @@
-<% if(page.gallery) {%>
-	<% if(page.gallery.length > 0) {%>
-		<div id="package_slideshow" class="slideshow bottom-20">
+<% if(slides) {%>
+	<% if(slides.length > 0) {%>
+		<div id="<%= slide_id%>" class="slideshow bottom-20">
 
-			<% for(var x = 0; x < page.gallery.length; x++) {%>
-				<div class="slides"><img class="img-responsive" width="600" height="400" alt="<%= page.title%>" src="<%= page.gallery[x]%>" /></div>	
+			<% for(var x = 0; x < slides.length; x++) {%>
+				<img class="slides img-responsive" width="600" height="400" alt="<%= page.title%>" src="<%= slides[x]%>" />
 			<% } %>
-			<a class="next pure-button pure-button-primary" onclick="plusSlides(+1, 'package_slideshow')">&#10095;</a>
+			<a class="next pure-button pure-button-primary" onclick="plusSlides(+1, '<%= slide_id%>')">&#10095;</a>
 		</div>
 	<% } else {%>
-		<img width="600" height="400" class="img-responsive" alt="<%= page.title%>" src="/images/bg-logo.svg">
+		<%if(slide_id == "package_slide") {%>
+			<img width="600" height="400" class="img-responsive" alt="<%= page.title%>" src="/images/bg-logo.svg">
+		<% } %>
 	<% } %>
 <% } else { %>
-	<img width="600" height="400" class="img-responsive" alt="<%= page.title%>" src="/images/bg-logo.svg">
+		<%if(slide_id == "package_slide") {%>
+			<img width="600" height="400" class="img-responsive" alt="<%= page.title%>" src="/images/bg-logo.svg">
+		<% } %>
 <% } %>

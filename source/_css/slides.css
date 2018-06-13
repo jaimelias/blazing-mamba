@@ -1,10 +1,19 @@
 .slideshow
 {
 	position: relative;
+	padding-top: 66.6666%;
+	width: 100%;
 }
 .slideshow > .slides, .slideshow > .next 
 {
 	position: absolute;
+}
+.slideshow > .slides
+{
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
 .slideshow > .next
 {
