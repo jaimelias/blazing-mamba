@@ -38,7 +38,7 @@
 			
 			<div class="pure-g gutters">
 				<div class="pure-u-1 pure-u-sm-1-3">
-					<a class="pointer" onclick="show_modal('<%= "modal_"+key%>')"><img width="150" height="100" class="img-responsive" alt="<%= page.sub_packages[key].name%>" src="<%if(page.sub_packages[key].thumbnail){%><%= page.sub_packages[key].thumbnail%><%} else{%>/images/bg-logo.svg<%}%>" /></a>
+					<a <%if(page.sub_packages[key].gallery){%><% if(page.sub_packages[key].gallery.length > 0) {%>class="pointer" onclick="show_modal('<%= "modal_"+key%>')"<% } %><% } %>><img width="150" height="100" class="img-responsive" alt="<%= page.sub_packages[key].name%>" src="<%if(page.sub_packages[key].thumbnail){%><%= page.sub_packages[key].thumbnail%><%} else{%>/images/bg-logo.svg<%}%>" /></a>
 					
 					
 					<%if(page.sub_packages[key].gallery){%>

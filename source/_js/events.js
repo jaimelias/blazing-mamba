@@ -35,7 +35,6 @@ function booking_submit(event_id)
 {
 	console.log(event_id);
 	merge_addons(event_id);
-	calculate_total(event_id);
 	var event_form = document.getElementById("event-"+event_id);
 	var fields = event_form.querySelectorAll("input, select, textarea");
 	var output = {};
@@ -120,32 +119,10 @@ function merge_addons(event_id)
 		});		
 	}
 }
-function calculate_total(event_id)
-{
-	var total = 0;
-	var json = document.getElementById('event-json-' + event_id);
-	
-	if(json !== null)
-	{
-		json = JSON.parse(json.innerHTML);
-		var participants = document.getElementById('event-participants-' + event_id).value;	
-		total = json.base_price + (json.event_price * participants);
-		
-		[].forEach.call(document.getElementsByClassName('addon-'+event_id), function (el, index) {
-			
-			if(parseInt(el.value) > 0)
-			{
-				total = total + (el.value * json.addons[index].price);
-			}
-		});	
-		
-		[].forEach.call(document.getElementsByName('price'), function (el) {
-			el.value = total;
-		});		
-	}
-}
 function calculate_vars(event_id)
 {
+	var event_form = document.getElementById("event-"+event_id);
+	var price_field = event_form.querySelectorAll('input[name="price"]');	
 	var obj = {};
 	obj.items = [];
 	var total = 0;
@@ -226,7 +203,12 @@ function calculate_vars(event_id)
 	
 	[].forEach.call(document.getElementsByClassName('event-breakdown-'+event_id), function (el) {
 		el.innerHTML = template.render(obj);
-	});	
+	});
+	
+	[].forEach.call(price_field, function (el) {
+		el.value = total;
+	});
+	
 }
 
 function fill_hours()
@@ -298,7 +280,6 @@ function ajax_post(json)
 		{
 			console.log(xhr.responseText);
 			show_modal('response');
-			show_modal('estimates');
 		}
 		else
 		{
