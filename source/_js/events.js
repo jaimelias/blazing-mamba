@@ -279,6 +279,7 @@ function ajax_post(json)
 		if (xhr.status === 200)
 		{
 			console.log(xhr.responseText);
+			show_modal('estimates');
 			show_modal('response');
 		}
 		else

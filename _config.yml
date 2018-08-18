@@ -13,7 +13,7 @@ menu:
 #url, title, class, onclick
 menu_button:
   user:
-    onclick: show_modal("estimates");
+    onclick: show_modal("estimates")
     title: "Cotizaciones"
     url: "#"
     class: "pure-button-primary"
@@ -150,6 +150,7 @@ hero:
     home:
       enable: true
       title: "Creadores de Experiencias"
+      description: "La forma más rápida de contratar nuevos servicios de calidad que necesitas en tu vida."
     blog:
       enable: true
       title: "#ComunidadMamba"

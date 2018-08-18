@@ -16,7 +16,7 @@
 					<h1 class="<%= hero%>"><%= theme.hero[hero].title%></h1>			
 			<%}}%>
 			<% if(theme.hero[hero].description) {%>
-				<h3 class="light"><%= theme.hero[hero].description%></h3>
+				<h3 class="normal"><%= theme.hero[hero].description%></h3>
 			<%}%>
 			<% if(theme.hero[hero].button) {%>
 				<a class="pure-button pure-button-black button-xl" <%if(theme.hero[hero].button.url){%>href="<%= theme.hero[hero].button.url%>"<%}%><%if(theme.hero[hero].button.onclick){%>onclick="<%= theme.hero[hero].button.onclick%>" <%}%>><%= theme.hero[hero].button.text%></a>
