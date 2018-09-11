@@ -51,11 +51,13 @@
 				<div class="pure-u-1 pure-u-sm-2-3">
 					<div class="strong">Incluye:</div>
 					<ul class="small">
-						<% Object.keys(page.sub_packages[key].includes).forEach(function(list) { %>
-							<% if(page.sub_packages[key].includes[list]) {%>
-								<li><%= page.sub_packages[key].includes[list]%></li>
-							<% } %>
-						<%});%>
+						<% if(page.sub_packages.hasOwnProperty("includes")){%>
+							<% Object.keys(page.sub_packages[key].includes).forEach(function(list) { %>
+								<% if(page.sub_packages[key].includes[list]) {%>
+									<li><%= page.sub_packages[key].includes[list]%></li>
+								<% } %>
+							<%});%>
+						<% } %>
 					</ul>
 					
 					

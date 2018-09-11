@@ -1,13 +1,13 @@
 <% var args = page.posts.sort("date", "desc").limit(config.per_page || 10) %>
 
 <div class="container">
-	<section id="index" class="bottom-40"> 
+	<section id="index"> 
 		<% args.each(function(post){ %>
-			<div class="post">
+			<div class="post bottom-40">
 				<% if(is_home()){%>
 					<div class="pure-g gutters">
 						<div class="pure-u-1 pure-u-sm-1-3">
-							<a href="<%= url_for(post.path) %>"><img class="img-responsive" height="300" width="200" src="/images/<%if(post.thumbnail != null){%><%= post.thumbnail %><%} else{%>bg-logo.svg<% } %>" alt="<%= post.title%>" /></a>
+							<a href="<%= url_for(post.path) %>"><img class="img-responsive" height="300" width="200" src="<%if(post.thumbnail != null){%><%= post.thumbnail %><%} else{%>/images/bg-logo.svg<% } %>" alt="<%= post.title%>" /></a>
 						</div>
 						<div class="pure-u-1 pure-u-sm-2-3">
 							<h3 class="post-title"><a href="<%= url_for(post.path) %>"><%= post.title%></a></h3>
@@ -20,7 +20,7 @@
 				
 					<h2 class="post-title"><a href="<%= url_for(post.path) %>"><%= post.title%></a></h2>
 					
-					<p><a href="<%= url_for(post.path) %>"><img class="img-responsive" height="400" width="600" src="/images/<%if(post.image != null){%><%= post.image %><%} else{%>bg-logo.svg<% } %>" alt="<%= post.title%>" /></a></p>
+					<p><a href="<%= url_for(post.path) %>"><img class="img-responsive" height="400" width="600" src="<%if(post.image != null){%><%= post.image %><%} else{%>/images/bg-logo.svg<% } %>" alt="<%= post.title%>" /></a></p>
 		
 					<% if(post.hasOwnProperty("description")) { if(post.description != null){ %>
 						<p><%= post.description %></p>

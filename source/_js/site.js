@@ -10,9 +10,10 @@ function show_modal(the_id)
 }
 function google_async(UA)
 {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', UA, 'auto');
-	ga('send', 'pageview');	
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', UA);
 }
 function hasClass(e, c) {
     return (' ' + e.className + ' ').indexOf(' ' + c + ' ') > -1;

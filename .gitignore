@@ -4,3 +4,6 @@ db.json
 *.log
 node_modules/
 .deploy*/
+config.yml
+scripts/airtable.js
+scripts/core.js

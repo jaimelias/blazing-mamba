@@ -100,9 +100,9 @@ scripts:
     callback: date_picker()
     position: bottom
   google_analytics:
-    url: https://www.google-analytics.com/analytics.js
+    url: https://www.googletagmanager.com/gtag/js?id=UA-124724268-1
     async: async
-    callback: google_async("UA-101494881-1")
+    callback: google_async("UA-124724268-1")
     position: bottom
   sharethis:
     url: //platform-api.sharethis.com/js/sharethis.js#property=5ab97990ce89f000136419fd&product=inline-share-buttons
